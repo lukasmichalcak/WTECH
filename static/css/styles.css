@@ -29,7 +29,7 @@ main {
 }
 
 footer {
-    background-color: #f8f9fa;
+    background-color: #f9fbfd;
     text-align: center;
     padding: 1rem;
 }
@@ -39,9 +39,9 @@ footer {
     background-color: #3c4633 !important;
 }
 
-/*.navbar {*/
-/*    height: 50px; !* Match your design *!*/
-/*}*/
+.prometex-in-footer-color {
+    color: #000 !important;
+}
 
 /*Prometex logo brand */
 .navbar-brand{
@@ -66,31 +66,6 @@ footer {
     color: white;
 
 }
-/*!*.navbar*!*/
-/*!* Split the screen in half *!*/
-/*.split {*/
-/*    !*height: calc(100vh - 75px); !* Full height minus navbar height *!*!*!*!*!*/
-/*    !*position: fixed;*!*/
-/*    !*top: 75px; !* Start right after navbar *!*!*/
-/*    !*overflow-y: auto; !* Allow scrolling if content is too long *!*!*/
-/*    !*padding: 20px 0; !* Add some vertical padding *!*!*/
-/*    height: auto;*/
-/*    min-height: 300px;*/
-/*}*/
-
-/*!* Control the left side *!*/
-/*.left {*/
-/*    left: 0;*/
-/*    width: 55%;*/
-/*    background-color: #c7bcbc;*/
-/*}*/
-
-/*!* Control the right side *!*/
-/*.right {*/
-/*    right: 0;*/
-/*    width: 45%;*/
-/*    background-color: #e0aeae;*/
-/*}*/
 
 .centered {
     position: relative;
