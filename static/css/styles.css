@@ -1,0 +1,20 @@
+/* Apply Poppins to the entire website */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+    background-color: #3c4633 !important; /* Dark green background */
+    height: 75px; /* Match your design */
+}
+
+.navbar-brand{
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.nav-link{
+    color: #ffffff;
+    font-size: 24px;
+}
+
