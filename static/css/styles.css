@@ -3,13 +3,19 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+/*Main colour */
+.prometex-color {
+    background-color: #3c4633 !important;
+}
+
 .navbar {
-    background-color: #3c4633 !important; /* Dark green background */
     height: 75px; /* Match your design */
 }
 
+/*Prometex logo brand */
 .navbar-brand{
     color: #ffffff;
+    font-size: 32px;
     font-weight: bold;
 }
 
@@ -18,3 +24,52 @@ body {
     font-size: 24px;
 }
 
+/*Width of search bar*/
+.navbar .form-control {
+    width: 600px;
+}
+
+/*Changes the color of text inside search button*/
+.navbar .btn {
+    /*height: 30px */
+    color: white;
+
+}
+/*.navbar*/
+/* Split the screen in half */
+.split {
+    height: calc(100vh - 75px); /* Full height minus navbar height *!*!*!*/
+    position: fixed;
+    /*top: 75px; !* Start right after navbar *!*/
+    overflow-y: auto; /* Allow scrolling if content is too long */
+    /*padding: 20px 0; !* Add some vertical padding *!*/
+}
+
+/* Control the left side */
+.left {
+    left: 0;
+    width: 55%;
+    background-color: #c7bcbc;
+}
+
+/* Control the right side */
+.right {
+    right: 0;
+    width: 45%;
+    background-color: #e0aeae;
+}
+
+.centered {
+    position: relative;
+    width: 90%; /* Controls content width */
+    max-width: 800px; /* Optional: limit maximum width */
+    margin: 0 auto; /* Center horizontally */
+    padding: 20px; /* Add padding around content */
+    text-align: center;
+}
+
+/*Product title on the right side of the screen*/
+#product-title{
+    font-size: 21px;
+    color: #4B5945;
+}
