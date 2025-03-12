@@ -9,13 +9,13 @@ body {
 }
 
 .navbar {
-    height: 75px; /* Match your design */
+    height: 50px; /* Match your design */
 }
 
 /*Prometex logo brand */
 .navbar-brand{
     color: #ffffff;
-    font-size: 32px;
+    font-size: 20px;
     font-weight: bold;
 }
 
