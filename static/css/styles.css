@@ -5,7 +5,7 @@ body {
 
 /*Main colour */
 .prometex-color {
-    background-color: #3c4633 !important;
+    background-color: #3674b5 !important;
 }
 
 .navbar {
@@ -24,17 +24,7 @@ body {
     font-size: 24px;
 }
 
-/*Width of search bar*/
-.navbar .form-control {
-    width: 600px;
-}
-
-/*Changes the color of text inside search button*/
-.navbar .btn {
-    /*height: 30px */
-    color: white;
-
-}
+/*}*/
 /*.navbar*/
 /* Split the screen in half */
 .split {
@@ -45,31 +35,53 @@ body {
     /*padding: 20px 0; !* Add some vertical padding *!*/
 }
 
-/* Control the left side */
-.left {
-    left: 0;
-    width: 55%;
-    background-color: #c7bcbc;
+
+
+#search-button{
+    background-color: white;
+    color: #3674b5;
 }
 
-/* Control the right side */
-.right {
-    right: 0;
-    width: 45%;
-    background-color: #e0aeae;
+
+/*These are variants for attributes*/
+.product-variants{
+    font-size: 14px;
 }
 
-.centered {
-    position: relative;
-    width: 90%; /* Controls content width */
-    max-width: 800px; /* Optional: limit maximum width */
-    margin: 0 auto; /* Center horizontally */
-    padding: 20px; /* Add padding around content */
-    text-align: center;
+/* Optional: Add some styling to visualize the sections better */
+.content-section {
+    padding: 20px;
+    min-height: 400px;
 }
 
-/*Product title on the right side of the screen*/
-#product-title{
-    font-size: 21px;
-    color: #4B5945;
+/*Size of title in the product details page */
+.content-section h2 {
+    font-size: 18px !important;
+    font-weight: bold;
+    color: black;
+}
+
+/*Size of options in product detail page*/
+.content-section h3 {
+    font-size: 15px !important;
+    font-weight: bold;
+    color: #3674b5;
+}
+
+
+.btn-secondary{
+    background-color: #d1f8ef;
+    color: black;
+}
+
+.content-section .price{
+
+    font-size: 20px !important;
+}
+
+
+#stock-left{
+    font-size: 12px;
+    color: #578fca;
+    font-weight: bold;
 }
