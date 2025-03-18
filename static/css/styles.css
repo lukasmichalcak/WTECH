@@ -85,3 +85,12 @@ body {
     color: #578fca;
     font-weight: bold;
 }
+
+/*badge near cart icon*/
+.cart-badge {
+    font-size: 0.7rem;
+    padding: 2px 5px;
+    min-width: 16px;
+    min-height: 16px;
+    line-height: 1;
+}
