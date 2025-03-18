@@ -119,3 +119,40 @@ body {
 .thumbnail:hover {
     border: 2px solid orange;
 }
+
+/*ADMIN ADD NEW PRODUCT PAGE*/
+
+.upload-outer-div{
+    background-color: lightgrey;
+    height: 400px;
+    justify-content: center;
+}
+
+.big-upload{
+    font-size: 55px;
+    /*color: white;*/
+}
+
+/*FOOTER CSS*/
+.footer-text{
+    font-size: 14px;
+    max-height: 50px;
+}
+
+.company-text-footer{
+    font-weight: bold;
+}
+
+/*LOGIN MAIN DIV HEIGHT*/
+.login-main-div{
+    min-height: 500px;
+}
+
+body{
+    min-height: 100vh;
+}
+
+.div-with-side-bar{
+    margin-left: 0;
+    padding: 0;
+}
