@@ -35,10 +35,8 @@
                 </a>
                 <a class="nav-link d-inline-block position-relative me-3" href="/templates/shopping-cart.html">
                     <i class="bi bi-cart fs-4"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-badge">
-                        3
-                        <span class="visually-hidden">items in cart</span>
-                    </span>
+                    <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle
+                    badge rounded-pill bg-danger cart-badge">3</span>
                 </a>
 
         </div>
@@ -46,19 +44,24 @@
         </div>
     </nav>
 
+    <!-- Split Content Area -->
+    <div class="container mt-3">
+        <div class="row">
 
-<!-- Split Content Area -->
-<div class="container mt-3">
-    <div class="row">
-        <!-- Left Section (50% or 6/12) -->
-        <div class="col-md-7 content-section">
+            <!-- Left Section (50% or 6/12) -->
+            <div class="col-md-7 content-section">
 
+                <!-- Main Image -->
+                <img id="main-image" src="../static/images/MacBookPro_1.png" class="main-img img-fluid shadow" alt="Main Product Image">
 
-                <img src="../static/images/MacBookProMan.webp" class="img-fluid" alt="Main product image">
-
-
-
-                <!-- Your content here -->
+                <!-- Thumbnail Images -->
+                <div class="thumbnail-row">
+                    <img src="../static/images/MacBookPro_1.png" class="thumbnail" onclick="changeImage('../static/images/MacBookPro_1.png')" alt="Thumbnail 0">
+                    <img src="../static/images/MacBookPro_2.jpg" class="thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 1">
+                    <img src="../static/images/MacBookPro_2.jpg" class="thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 2">
+                    <img src="../static/images/MacBookPro_2.jpg" class="thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 3">
+                    <img src="../static/images/MacBookPro_2.jpg" class="thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 4">
+                </div>
             </div>
 
             <!-- Right Section (50% or 6/12) -->
@@ -68,7 +71,7 @@
                     the powerful M4 Pro chip. Its 14.2" Liquid Retina XDR display offers stunning visuals, while the sleek
                     Space Black design adds a premium touch. With long battery life and pro-level efficiency, it's perfect
                     for work and creativity.</p>
-                <!-- Your content here -->
+
                 <div class="ms-2">
                     <h3>Colour</h3>
                     <button type="button" class="btn btn-primary btn-sm color-btn" data-color="space-black">Space Black</button>
@@ -86,10 +89,9 @@
 
                     <h3 class="mt-5 price">2979,99$</h3>
 
-                    <button type="button" class="btn btn-secondary btn-sm"> Add to cart   <i class="bi bi-bag-plus"></i></button>
+                    <button type="button" class="btn btn-secondary btn-sm add-cart-btn"> Add to cart   <i class="bi bi-bag-plus"></i></button>
 
                     <h4 class="mt-1"   id="stock-left">Stocks left: 69</h4>
-
                 </div>
             </div>
         </div>

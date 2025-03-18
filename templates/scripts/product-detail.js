@@ -50,4 +50,17 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log("Selected SSD:", btn.getAttribute("data-ssd"));
         });
     });
+
+    //============ Update number in badge ============
+    const addToCartButton = document.querySelector(".add-cart-btn");
+
+    addToCartButton.addEventListener("click", () => {
+        const cartBadge = document.querySelector(".cart-badge");
+        cartBadge.textContent = String(parseInt(cartBadge.textContent, 10) + 1);
+    })
+
 });
+
+function changeImage(imageSrc) {
+    document.getElementById("main-image").src = imageSrc;
+}

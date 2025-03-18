@@ -94,3 +94,28 @@ body {
     min-height: 16px;
     line-height: 1;
 }
+
+/*image gallery on product page*/
+.main-img {
+    width: 100%; /* Large image takes full width */
+    max-height: 400px; /* Adjust as needed */
+    object-fit: contain;
+}
+
+.thumbnail-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.thumbnail {
+    width: 80px; /* Smaller version */
+    height: 80px;
+    cursor: pointer;
+    object-fit: cover;
+    border: 2px solid transparent;
+}
+
+.thumbnail:hover {
+    border: 2px solid orange;
+}
