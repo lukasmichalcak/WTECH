@@ -1,6 +1,22 @@
 /* Apply Poppins to the entire website */
-body {
+html, body {
     font-family: 'Poppins', sans-serif;
+    height: 100%;
+    margin: 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures full viewport height */
+}
+
+main {
+    flex-grow: 1; /* Pushes the footer down when there’s little content */
+}
+
+footer {
+    padding: 10px;
 }
 
 /*Main colour */
@@ -86,6 +102,39 @@ body {
     font-weight: bold;
 }
 
+/*badge near cart icon*/
+.cart-badge {
+    font-size: 0.7rem;
+    padding: 2px 5px;
+    min-width: 16px;
+    min-height: 16px;
+    line-height: 1;
+}
+
+/*image gallery on product page*/
+.main-img {
+    width: 100%; /* Large image takes full width */
+    max-height: 400px; /* Adjust as needed */
+    object-fit: contain;
+}
+
+.thumbnail-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.thumbnail {
+    width: 80px; /* Smaller version */
+    height: 80px;
+    cursor: pointer;
+    object-fit: cover;
+    border: 2px solid transparent;
+}
+
+.thumbnail:hover {
+    border: 2px solid orange;
+}
 
 /*ADMIN ADD NEW PRODUCT PAGE*/
 
@@ -123,5 +172,3 @@ body{
     margin-left: 0;
     padding: 0;
 }
-
-
