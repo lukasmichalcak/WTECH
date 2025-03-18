@@ -1,6 +1,22 @@
 /* Apply Poppins to the entire website */
-body {
+html, body {
     font-family: 'Poppins', sans-serif;
+    height: 100%;
+    margin: 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures full viewport height */
+}
+
+main {
+    flex-grow: 1; /* Pushes the footer down when there’s little content */
+}
+
+footer {
+    padding: 10px;
 }
 
 /*Main colour */
