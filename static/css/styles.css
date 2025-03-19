@@ -125,3 +125,17 @@ body{
 }
 
 
+.carousel-wrapper {
+    position: relative;
+}
+
+/*Homepage*/
+
+.main-div-homepage{
+    margin-left: 0;
+}
+
+
+.carousel-wrapper .img-fluid{
+    width: 100%;
+}
