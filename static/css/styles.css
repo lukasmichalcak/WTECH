@@ -51,13 +51,14 @@ footer {
     /*padding: 20px 0; !* Add some vertical padding *!*/
 }
 
-
-
-#search-button{
+.search-button{
     background-color: white;
     color: #3674b5;
 }
 
+.searchbar-input {
+    width: 500px
+}
 
 /*These are variants for attributes*/
 .product-variants{
@@ -171,4 +172,34 @@ body{
 .div-with-side-bar{
     margin-left: 0;
     padding: 0;
+}
+
+/*TESTOS*/
+/* Ensure the search bar stays properly sized */
+.search-container {
+    flex-grow: 1;
+    justify-content: center;
+    max-width: 500px; /* Prevents excessive shrinking */
+}
+
+/* Keep search input large on bigger screens */
+.search-input {
+    width: 100%;
+    min-width: 300px;
+    max-width: 500px;
+}
+
+/* Search form - Hidden by default on small screens */
+@media (max-width: 991px) {
+    .search-form {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 10%;
+        right: 10%;
+        background: white;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
 }
