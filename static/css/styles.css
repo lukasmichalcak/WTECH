@@ -56,10 +56,6 @@ footer {
     color: #3674b5;
 }
 
-.searchbar-input {
-    width: 500px
-}
-
 /*These are variants for attributes*/
 .product-variants{
     font-size: 14px;
@@ -184,22 +180,46 @@ body{
 
 /* Keep search input large on bigger screens */
 .search-input {
-    width: 100%;
+    /*width: 100%;*/
     min-width: 300px;
-    max-width: 500px;
+    width: 500px;
 }
 
 /* Search form - Hidden by default on small screens */
 @media (max-width: 991px) {
+    .search-container {
+        display: flex;
+        align-items: center;  /* Ensures everything stays vertically aligned */
+        justify-content: center;
+        width: 100%; /* Prevents shrinking */
+    }
+
+    /* Ensure search bar is positioned correctly */
     .search-form {
-        display: none;
-        position: absolute;
-        top: 60px;
-        left: 10%;
-        right: 10%;
+        position: relative; /* Change from absolute to relative */
+        width: 80%; /* Adjust width dynamically */
+        margin: auto; /* Center it */
         background: white;
         padding: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
+        z-index: 1000; /* Ensure it's above background */
+    }
+
+    /* Adjust search input height */
+    .search-input {
+        height: 40px; /* Makes sure it looks good */
+    }
+
+    .navbar-collapse {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Aligns items to left */
+    }
+
+    .ms-auto {
+        margin-left: auto !important; /* Ensures profile/cart icons stay right */
+        display: flex;
+        justify-content: flex-end;
+        width: 100%; /* Take full width to push them to the right */
     }
 }
