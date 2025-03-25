@@ -56,6 +56,7 @@ footer {
     color: #3674b5;
 }
 
+
 /*These are variants for attributes*/
 .product-variants{
     font-size: 14px;
@@ -183,6 +184,21 @@ body{
     /*width: 100%;*/
     min-width: 300px;
     width: 500px;
+}
+
+.carousel-wrapper {
+    position: relative;
+}
+
+/*Homepage*/
+
+.main-div-homepage{
+    margin-left: 0;
+}
+
+
+.carousel-wrapper .img-fluid{
+    width: 100%;
 }
 
 /* Search form - Hidden by default on small screens */
