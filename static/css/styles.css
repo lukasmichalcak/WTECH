@@ -215,9 +215,9 @@ body{
         position: relative; /* Change from absolute to relative */
         width: 80%; /* Adjust width dynamically */
         margin: auto; /* Center it */
-        background: white;
+        /*background: white;*/
         padding: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
         z-index: 1000; /* Ensure it's above background */
     }
 
