@@ -40,7 +40,6 @@ footer {
     font-size: 24px;
 }
 
-/*}*/
 /*.navbar*/
 /* Split the screen in half */
 .split {
@@ -165,7 +164,6 @@ body{
     padding: 0;
 }
 
-/*TESTOS*/
 /* Ensure the search bar stays properly sized */
 .search-container {
     flex-grow: 1;
@@ -198,6 +196,24 @@ body{
 /*For hovering over filters*/
 .form-select {
     cursor: pointer;
+}
+
+/*breadcrumb navigation*/
+.breadcrumb {
+    --bs-breadcrumb-divider: '\00a0\00a0\00a0\00a0>>\00a0\00a0\00a0\00a0';
+    font-size: 22px;
+}
+
+.breadcrumb-item.active {
+    font-weight: 600;
+    color: #3674b5;
+}
+
+p.card-price {
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: bold;
 }
 
 /* Search form - Hidden by default on small screens */
