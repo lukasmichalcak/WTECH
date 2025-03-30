@@ -40,7 +40,6 @@ footer {
     font-size: 24px;
 }
 
-/*}*/
 /*.navbar*/
 /* Split the screen in half */
 .split {
@@ -88,7 +87,7 @@ footer {
     color: black;
 }
 
-.content-section .price{
+.content-section .price, .size-20-text{
 
     font-size: 20px !important;
 }
@@ -116,12 +115,6 @@ footer {
     object-fit: contain;
 }
 
-.thumbnail-row {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
 .thumbnail {
     width: 80px; /* Smaller version */
     height: 80px;
@@ -130,8 +123,8 @@ footer {
     border: 2px solid transparent;
 }
 
-.thumbnail:hover {
-    border: 2px solid orange;
+.img-thumbnail:hover {
+    border: 2px solid #3674b5;
 }
 
 /*ADMIN ADD NEW PRODUCT PAGE*/
@@ -171,7 +164,6 @@ body{
     padding: 0;
 }
 
-/*TESTOS*/
 /* Ensure the search bar stays properly sized */
 .search-container {
     flex-grow: 1;
@@ -201,6 +193,34 @@ body{
     width: 100%;
 }
 
+/*For hovering over filters*/
+.form-select {
+    cursor: pointer;
+}
+
+/*breadcrumb navigation*/
+.breadcrumb {
+    --bs-breadcrumb-divider: '\00a0\00a0\00a0\00a0>>\00a0\00a0\00a0\00a0';
+    font-size: 22px;
+}
+
+.breadcrumb-item.active {
+    font-weight: 600;
+    color: #3674b5;
+}
+
+/*!* Order Summary container*!*/
+/*.ord-sum-container {*/
+/*    display: grid;*/
+/*}*/
+
+p.card-price {
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
 /* Search form - Hidden by default on small screens */
 @media (max-width: 991px) {
     .search-container {
@@ -215,9 +235,9 @@ body{
         position: relative; /* Change from absolute to relative */
         width: 80%; /* Adjust width dynamically */
         margin: auto; /* Center it */
-        background: white;
+        /*background: white;*/
         padding: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
         z-index: 1000; /* Ensure it's above background */
     }
 

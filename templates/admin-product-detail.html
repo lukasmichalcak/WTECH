@@ -15,7 +15,7 @@
     <header>
     <nav class="navbar prometex-color navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Prometex</a>
+            <a class="navbar-brand" href="home-page.html">Prometex</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-supported-content" aria-controls="navbar-supported-content" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -30,20 +30,23 @@
                     <!-- Search Form -->
                     <form class="d-flex search-form">
                         <input class="form-control me-2 search-input" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-light my-2 my-sm-0 search-button" type="submit">Search</button>
+                        <button class="btn btn-outline-light my-0 search-button" type="submit">Search</button>
                     </form>
                 </div>
 
                 <div class="me-auto"></div>
 
-                <a class="nav-link d-inline-block position-relative me-3 invisible" href="/templates/shopping-cart.html">
-                    <i class="bi bi-cart fs-4"></i>
-                    <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle
+                <div class="justify-content-center">
+                    <a class="nav-link d-inline-block position-relative me-3 invisible" href="shopping-cart.html">
+                        <i class="bi bi-cart fs-4"></i>
+                        <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle
                         badge rounded-pill bg-danger cart-badge">3</span>
-                </a>
-                <a class="nav-link d-inline-block me-3" href="/templates/profile-page.html">
-                    <i class="bi bi-person"></i>
-                </a>
+                    </a>
+                    <a class="nav-link d-inline-block me-3" href="profile-page.html">
+                        <i class="bi bi-person"></i>
+                    </a>
+                </div>
+
             </div>
         </div>
     </nav>
@@ -60,13 +63,28 @@
                 <img id="main-image" src="../static/images/MacBookPro_1.png" class="main-img img-fluid shadow" alt="Main Product Image">
 
                 <!-- Thumbnail Images -->
-                <div class="thumbnail-row">
-                    <img src="../static/images/MacBookPro_1.png" class="thumbnail" alt="Thumbnail 0">
-                    <img src="../static/images/MacBookPro_2.jpg" class="thumbnail" alt="Thumbnail 1">
-                    <img src="../static/images/MacBookPro_2.jpg" class="thumbnail" alt="Thumbnail 2">
-                    <img src="../static/images/MacBookPro_2.jpg" class="thumbnail" alt="Thumbnail 3">
-                    <img src="../static/images/MacBookPro_2.jpg" class="thumbnail" alt="Thumbnail 4">
-                    <i class="bi bi-plus-circle align-content-center"></i>
+                <div class="container px-0">
+                    <div class="row row-cols-md-3 row-cols-lg-6 gx-0">
+                        <div class="col-2">
+                            <img src="../static/images/MacBookPro_1.png" class="img-thumbnail" onclick="changeImage('../static/images/MacBookPro_1.png')" alt="Thumbnail 0">
+                        </div>
+                        <div class="col-2">
+                            <img src="../static/images/MacBookPro_2.jpg" class="img-thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 1">
+                        </div>
+                        <div class="col-2">
+                            <img src="../static/images/MacBookPro_2.jpg" class="img-thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 2">
+                        </div>
+                        <div class="col-2">
+                            <img src="../static/images/MacBookPro_2.jpg" class="img-thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 3">
+                        </div>
+                        <div class="col-2">
+                            <img src="../static/images/MacBookPro_2.jpg" class="img-thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 4">
+                        </div>
+                        <div class="col-2 align-content-center">
+                            <i class="bi bi-plus-circle"></i>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
