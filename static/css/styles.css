@@ -87,7 +87,7 @@ footer {
     color: black;
 }
 
-.content-section .price{
+.content-section .price, .size-20-text{
 
     font-size: 20px !important;
 }
@@ -208,6 +208,11 @@ body{
     font-weight: 600;
     color: #3674b5;
 }
+
+/*!* Order Summary container*!*/
+/*.ord-sum-container {*/
+/*    display: grid;*/
+/*}*/
 
 p.card-price {
     font-size: 20px;
