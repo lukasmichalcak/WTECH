@@ -195,6 +195,11 @@ body{
     width: 100%;
 }
 
+/*For hovering over filters*/
+.form-select {
+    cursor: pointer;
+}
+
 /* Search form - Hidden by default on small screens */
 @media (max-width: 991px) {
     .search-container {
