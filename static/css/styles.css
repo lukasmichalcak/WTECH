@@ -116,12 +116,6 @@ footer {
     object-fit: contain;
 }
 
-.thumbnail-row {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
 .thumbnail {
     width: 80px; /* Smaller version */
     height: 80px;
@@ -130,8 +124,8 @@ footer {
     border: 2px solid transparent;
 }
 
-.thumbnail:hover {
-    border: 2px solid orange;
+.img-thumbnail:hover {
+    border: 2px solid #3674b5;
 }
 
 /*ADMIN ADD NEW PRODUCT PAGE*/
