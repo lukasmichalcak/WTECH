@@ -15,7 +15,7 @@
     <header>
     <nav class="navbar prometex-color navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Prometex</a>
+            <a class="navbar-brand" href="home-page.html">Prometex</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-supported-content" aria-controls="navbar-supported-content" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -30,20 +30,24 @@
                     <!-- Search Form -->
                     <form class="d-flex search-form">
                         <input class="form-control me-2 search-input" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-light my-2 my-sm-0 search-button" type="submit">Search</button>
+                        <button class="btn btn-outline-light my-0  search-button" type="submit">Search</button>
                     </form>
                 </div>
 
                 <div class="me-auto"></div>
 
-                <a class="nav-link d-inline-block me-3" href="/templates/profile-page.html">
-                    <i class="bi bi-person"></i>
-                </a>
-                <a class="nav-link d-inline-block position-relative me-3" href="/templates/shopping-cart.html">
-                    <i class="bi bi-cart fs-4"></i>
-                    <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle
+                <div class="justify-content-center">
+                    <a class="nav-link d-inline-block me-3" href="profile-page.html">
+                        <i class="bi bi-person"></i>
+                    </a>
+                    <a class="nav-link d-inline-block position-relative me-3" href="shopping-cart.html">
+                        <i class="bi bi-cart fs-4"></i>
+                        <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle
                 badge rounded-pill bg-danger cart-badge">3</span>
-                </a>
+                    </a>
+                </div>
+
+
             </div>
         </div>
     </nav>
@@ -60,13 +64,29 @@
                 <img id="main-image" src="../static/images/MacBookPro_1.png" class="main-img img-fluid shadow" alt="Main Product Image">
 
                 <!-- Thumbnail Images -->
-                <div class="thumbnail-row">
-                    <img src="../static/images/MacBookPro_1.png" class="thumbnail" onclick="changeImage('../static/images/MacBookPro_1.png')" alt="Thumbnail 0">
-                    <img src="../static/images/MacBookPro_2.jpg" class="thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 1">
-                    <img src="../static/images/MacBookPro_2.jpg" class="thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 2">
-                    <img src="../static/images/MacBookPro_2.jpg" class="thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 3">
-                    <img src="../static/images/MacBookPro_2.jpg" class="thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 4">
+                <div class="container px-0">
+                    <div class="row row-cols-md-3 row-cols-lg-6 gx-0">
+                        <div class="col-2">
+                            <img src="../static/images/MacBookPro_1.png" class="img-thumbnail" onclick="changeImage('../static/images/MacBookPro_1.png')" alt="Thumbnail 0">
+                        </div>
+                        <div class="col-2">
+                            <img src="../static/images/MacBookPro_2.jpg" class="img-thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 1">
+                        </div>
+                        <div class="col-2">
+                            <img src="../static/images/MacBookPro_2.jpg" class="img-thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 2">
+                        </div>
+                        <div class="col-2">
+                            <img src="../static/images/MacBookPro_2.jpg" class="img-thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 3">
+                        </div>
+                        <div class="col-2">
+                            <img src="../static/images/MacBookPro_2.jpg" class="img-thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 4">
+                        </div>
+                        <div class="col-2">
+                            <img src="../static/images/MacBookPro_2.jpg" class="img-thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 5">
+                        </div>
+                    </div>
                 </div>
+
             </div>
 
             <!-- Right Section (50% or 6/12) -->
@@ -94,7 +114,7 @@
 
                     <h3 class="mt-5 price">2979,99$</h3>
 
-                    <button type="button" class="btn btn-secondary btn-sm add-cart-btn"> Add to cart   <i class="bi bi-bag-plus"></i></button>
+                    <button type="button" class="btn btn-secondary btn-sm add-cart-btn"> Add to cart   <i class="bi bi-cart-plus"></i></button>
 
                     <h4 class="mt-1"   id="stock-left">Stocks left: 69</h4>
 
@@ -107,9 +127,6 @@
     <footer class="py-3 my-4 border-top mb-0">
     <div class="container text-center">
         <div class="row">
-            <!--            <div class="col">-->
-            <!--                <p class="mb-0 text-body-secondary">© 2025 Company, Inc</p>-->
-            <!--            </div>-->
             <div class="col">
                 <a href="#" class="nav-link px-2 text-body-secondary footer-text">Home</a>
             </div>
@@ -141,6 +158,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
-<script src="/templates/scripts/product-detail.js"></script>
+<script src="scripts/product-detail.js"></script>
 </body>
 </html>
