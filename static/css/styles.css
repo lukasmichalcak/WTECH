@@ -266,7 +266,7 @@ p.card-price {
 /*        display: block;*/
 /*    }*/
 /*}*/
-@media  (max-width: 810px) {
+@media  (max-width: 850px) {
     .carousel-wrapper {
         display: none !important;
     }
@@ -305,3 +305,7 @@ p.card-price {
 /*}*/
 
 
+.product-card{
+    width: 200px;
+    height: auto;
+}
