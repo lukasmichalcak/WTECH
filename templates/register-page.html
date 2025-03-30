@@ -20,8 +20,6 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-
-
         </div>
     </nav>
     </header>
@@ -30,35 +28,76 @@
     <!-- Split Content Area -->
     <div class="container d-flex justify-content-center">
         <form>
+            <div class="container mt-5">
+                <h2 class="mb-3 text-center">Create an account</h2>
+                <p class="text-center"><a href="#">Already have an account? Log in</a></p>
 
-            <h1 class="form-group mt-3">Create an account</h1>
+                <form>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-control" placeholder="Enter first name">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-control" placeholder="Enter last name">
+                        </div>
+                    </div>
 
-            <a href="login-page.html">Already have an account? Log in</a>
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control" placeholder="Choose a username">
+                    </div>
 
-            <div class="form-group mt-3 mb-3">
-                <label for="exampleInputUsername">Username</label>
-                <input type="email" class="form-control" id="exampleInputUsername" aria-describedby="emailHelp" placeholder="Enter username">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" placeholder="Enter email">
+                            <small class="form-text text-muted">We'll never share your email.</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" placeholder="Password">
+                        </div>
+                    </div>
 
+                    <div class="mb-3">
+                        <label class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" placeholder="Re-enter password">
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-8">
+                            <label class="form-label">Address</label>
+                            <input type="text" class="form-control" placeholder="Street, number, apartment">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">City</label>
+                            <input type="text" class="form-control" placeholder="City">
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label">ZIP Code</label>
+                            <input type="text" class="form-control" placeholder="Postal code">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Country</label>
+                            <select class="form-select">
+                                <option>Choose...</option>
+                                <option>Slovakia</option>
+                                <option>Czech Republic</option>
+                                <option>Germany</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <a href="home-page.html" class="btn btn-primary rounded-pill d-block text-center">Create Account</a>
+                </form>
             </div>
 
-            <div class="form-group mt-3">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                <small class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group mt-3">
-                <label for="exampleInputPassword1">Create Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-            </div>
-            <div class="form-group mt-3">
-                <label for="exampleInputPassword2">Confirm Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
-            </div>
-            <div class="form-group form-check mt-3">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Create Account</button>
         </form>
     </div>
     </main>
