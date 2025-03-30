@@ -239,3 +239,49 @@ body{
         width: 100%; /* Take full width to push them to the right */
     }
 }
+
+/*Media query that hides carousel*/
+/*@media only screen and (min-width: 800px){*/
+/*    .carousel-wrapper {*/
+/*        display: block;*/
+/*    }*/
+/*}*/
+@media  (max-width: 810px) {
+    .carousel-wrapper {
+        display: none !important;
+    }
+}
+
+
+@media  (min-width: 540px) {
+    .main-nav-bar{
+        width: 280px; !important;
+
+    }
+}
+
+
+@media (max-width: 539px) {
+    .row {
+        flex-direction: column;
+    }
+
+}
+
+/*@media  (max-width: 519px) {*/
+/*    .main-nav-bar{*/
+/*        width: 100%; !important;*/
+/*        !*background-color: red !important;*!*/
+/*        display: flex;*/
+/*    }*/
+/*}*/
+
+/*@media  (max-width: 510px) {*/
+
+/*    .main-nav-bar{*/
+/*        width: 100%; !important;*/
+/*        background-color: red !important;*/
+/*    }*/
+/*}*/
+
+
