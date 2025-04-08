@@ -1,0 +1,311 @@
+/* Apply Poppins to the entire website */
+html, body {
+    font-family: 'Poppins', sans-serif;
+    height: 100%;
+    margin: 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures full viewport height */
+}
+
+main {
+    flex-grow: 1; /* Pushes the footer down when there’s little content */
+}
+
+footer {
+    padding: 10px;
+}
+
+/*Main colour */
+.prometex-color {
+    background-color: #3674b5 !important;
+}
+
+.prometex-in-footer-color {
+    color: #000 !important;
+}
+
+/*Prometex logo brand */
+.navbar-brand{
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nav-link{
+    color: #ffffff;
+    font-size: 24px;
+}
+
+/*.navbar*/
+/* Split the screen in half */
+.split {
+    height: calc(100vh - 75px); /* Full height minus navbar height *!*!*!*/
+    position: fixed;
+    /*top: 75px; !* Start right after navbar *!*/
+    overflow-y: auto; /* Allow scrolling if content is too long */
+    /*padding: 20px 0; !* Add some vertical padding *!*/
+}
+
+.search-button{
+    background-color: white;
+    color: #3674b5;
+}
+
+
+/*These are variants for attributes*/
+.product-variants{
+    font-size: 14px;
+}
+
+/* Optional: Add some styling to visualize the sections better */
+.content-section {
+    padding: 20px;
+    min-height: 400px;
+}
+
+/*Size of title in the product details page */
+.content-section h2 {
+    font-size: 18px !important;
+    font-weight: bold;
+    color: black;
+}
+
+/*Size of options in product detail page*/
+.content-section h3 {
+    font-size: 15px !important;
+    font-weight: bold;
+    color: #3674b5;
+}
+
+
+.btn-secondary{
+    background-color: #d1f8ef;
+    color: black;
+}
+
+.content-section .price, .size-20-text{
+
+    font-size: 20px !important;
+}
+
+
+#stock-left{
+    font-size: 12px;
+    color: #578fca;
+    font-weight: bold;
+}
+
+/*badge near cart icon*/
+.cart-badge {
+    font-size: 0.7rem;
+    padding: 2px 5px;
+    min-width: 16px;
+    min-height: 16px;
+    line-height: 1;
+}
+
+/*image gallery on product page*/
+.main-img {
+    width: 100%; /* Large image takes full width */
+    max-height: 400px; /* Adjust as needed */
+    object-fit: contain;
+}
+
+.thumbnail {
+    width: 80px; /* Smaller version */
+    height: 80px;
+    cursor: pointer;
+    object-fit: cover;
+    border: 2px solid transparent;
+}
+
+.img-thumbnail:hover {
+    border: 2px solid #3674b5;
+}
+
+/*ADMIN ADD NEW PRODUCT PAGE*/
+
+.upload-outer-div{
+    background-color: lightgrey;
+    height: 400px;
+    justify-content: center;
+}
+
+.big-upload{
+    font-size: 55px;
+    /*color: white;*/
+}
+
+/*FOOTER CSS*/
+.footer-text{
+    font-size: 14px;
+    max-height: 50px;
+}
+
+.company-text-footer{
+    font-weight: bold;
+}
+
+/*LOGIN MAIN DIV HEIGHT*/
+.login-main-div{
+    min-height: 500px;
+}
+
+body{
+    min-height: 100vh;
+}
+
+.div-with-side-bar{
+    margin-left: 0;
+    padding: 0;
+}
+
+/* Ensure the search bar stays properly sized */
+.search-container {
+    flex-grow: 1;
+    justify-content: center;
+    max-width: 500px; /* Prevents excessive shrinking */
+}
+
+/* Keep search input large on bigger screens */
+.search-input {
+    /*width: 100%;*/
+    min-width: 300px;
+    width: 500px;
+}
+
+.carousel-wrapper {
+    position: relative;
+}
+
+/*Homepage*/
+
+.main-div-homepage{
+    margin-left: 0;
+}
+
+
+.carousel-wrapper .img-fluid{
+    width: 100%;
+}
+
+/*For hovering over filters*/
+.form-select {
+    cursor: pointer;
+}
+
+/*breadcrumb navigation*/
+.breadcrumb {
+    --bs-breadcrumb-divider: '\00a0\00a0\00a0\00a0>>\00a0\00a0\00a0\00a0';
+    font-size: 22px;
+}
+
+.breadcrumb-item.active {
+    font-weight: 600;
+    color: #3674b5;
+}
+
+/*!* Order Summary container*!*/
+/*.ord-sum-container {*/
+/*    display: grid;*/
+/*}*/
+
+p.card-price {
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+/* Search form - Hidden by default on small screens */
+@media (max-width: 991px) {
+    .search-container {
+        display: flex;
+        align-items: center;  /* Ensures everything stays vertically aligned */
+        justify-content: center;
+        width: 100%; /* Prevents shrinking */
+    }
+
+    /* Ensure search bar is positioned correctly */
+    .search-form {
+        position: relative; /* Change from absolute to relative */
+        width: 80%; /* Adjust width dynamically */
+        margin: auto; /* Center it */
+        /*background: white;*/
+        padding: 10px;
+        /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
+        z-index: 1000; /* Ensure it's above background */
+    }
+
+    /* Adjust search input height */
+    .search-input {
+        height: 40px; /* Makes sure it looks good */
+    }
+
+    .navbar-collapse {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Aligns items to left */
+    }
+
+    .ms-auto {
+        margin-left: auto !important; /* Ensures profile/cart icons stay right */
+        display: flex;
+        justify-content: flex-end;
+        width: 100%; /* Take full width to push them to the right */
+    }
+}
+
+/*Media query that hides carousel*/
+/*@media only screen and (min-width: 800px){*/
+/*    .carousel-wrapper {*/
+/*        display: block;*/
+/*    }*/
+/*}*/
+@media  (max-width: 850px) {
+    .carousel-wrapper {
+        display: none !important;
+    }
+}
+
+
+@media  (min-width: 540px) {
+    .main-nav-bar{
+        width: 280px !important;
+
+    }
+}
+
+
+@media (max-width: 539px) {
+    .row {
+        flex-direction: column;
+    }
+
+}
+
+/*@media  (max-width: 519px) {*/
+/*    .main-nav-bar{*/
+/*        width: 100%; !important;*/
+/*        !*background-color: red !important;*!*/
+/*        display: flex;*/
+/*    }*/
+/*}*/
+
+/*@media  (max-width: 510px) {*/
+
+/*    .main-nav-bar{*/
+/*        width: 100%; !important;*/
+/*        background-color: red !important;*/
+/*    }*/
+/*}*/
+
+
+.product-card{
+    width: 200px;
+    height: auto;
+}
