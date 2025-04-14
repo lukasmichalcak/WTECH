@@ -4,6 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Tag;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Models\AddressDetails;
+use App\Models\CardDetails;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,17 +16,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([
-            UserSeeder::class,
-            AddressDetailsSeeder::class,
-            CardDetailsSeeder::class,
-            ProductSeeder::class,
-            UserFavouriteSeeder::class,
-            OrderSeeder::class,
-            ShoppingCartSeeder::class,
-            AttributeSeeder::class,
-            VariantSeeder::class,
-            TagSeeder::class,
+        $user = User::create([
+            'first_name' => 'maros',
+            'last_name' => 'guran',
+            'username' => 'mahosko',
+            'email' => 'maros@skrupulus.com',
+            'password' => Hash::make('mahosko'),
+        ]);
+
+        $userId = $user->id;
+
+        AddressDetails::factory()->count(1)->create([
+            'user_id' => $user->id,
+        ]);
+
+        CardDetails::factory()->count(2)->create([
+            'user_id' => $user->id,
         ]);
     }
 }

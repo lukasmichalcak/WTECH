@@ -16,7 +16,7 @@ return new class extends Migration
             $table->uuid('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->uuid('product_id');
-            $table->foreign('product_id')->references('id')->on('product');
+            $table->foreign('product_id')->references('id')->on('products');
             $table->jsonb('selected_variants');
             $table->integer('amount');
             $table->timestampsTz();
