@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\ShoppingCart;
+use App\Models\OrderItems;
 
 class ShoppingCartSeeder extends Seeder
 {
@@ -16,7 +16,7 @@ class ShoppingCartSeeder extends Seeder
      */
     public function run(): void
     {
-        $cart = ShoppingCart::create([
+        $cart = OrderItems::create([
             'user_id' => UserSeeder::$userId,
             'order_id' => OrderSeeder::$orderId,
             'product_id' => ProductSeeder::$productId,

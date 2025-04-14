@@ -24,6 +24,8 @@ class UserSeeder extends Seeder
             'password' => Hash::make('mahosko'),
         ]);
 
+        User::factory()->count(10)->create();
+
         self::$userId = $user->id; // stores the user for seeding
     }
 }

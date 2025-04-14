@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shopping_carts', function (Blueprint $table) {
+        Schema::create('order_items', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
             $table->uuid('order_id');
             $table->foreign('order_id')->references('id')->on('orders');
             $table->uuid('product_id');
             $table->foreign('product_id')->references('id')->on('products');
+            $table->jsonb('selected_variants');
             $table->integer('amount');
             $table->timestampsTz();
             $table->softDeletesTz();
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shopping_carts');
+        Schema::dropIfExists('order_items');
     }
 };

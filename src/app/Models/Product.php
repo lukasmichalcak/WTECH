@@ -17,6 +17,7 @@ class Product extends Model
      */
     protected $fillable = [
         'name',
+        'description',
         'type',
         'subtype',
         'price',
@@ -29,9 +30,14 @@ class Product extends Model
         return $this->hasMany(UserFavourite::class);
     }
 
-    public function shopping_carts()
+    public function cart_items()
     {
-        return $this->hasMany(ShoppingCart::class);
+        return $this->hasMany(CartItem::class);
+    }
+
+    public function order_items()
+    {
+        return $this->hasMany(OrderItems::class);
     }
 
     public  function attributes()

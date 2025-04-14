@@ -11,7 +11,7 @@ class HomeController
      */
     public function index()
     {
-        return view('test.home');
+        return view('home');
     }
 
     /**

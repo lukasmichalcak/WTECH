@@ -17,6 +17,7 @@ class ProductSeeder extends Seeder
     {
         $product = Product::create([
             'name' => 'MacBook',
+            'description' => 'The MacBook Pro 14" M4 Pro (2024) in Space Black delivers top-tier performance with the powerful M4 Pro chip. Its 14.2" Liquid Retina XDR display offers stunning visuals, while the sleek Space Black design adds a premium touch. With long battery life and pro-level efficiency, it\'s perfect for work and creativity.',
             'type' => 'Computers',
             'subtype' => 'Laptop',
             'price' => '3000$',

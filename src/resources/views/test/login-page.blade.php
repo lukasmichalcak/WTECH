@@ -43,7 +43,7 @@
                 <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
             </div>
 
-            <a href="home.blade.php" class="btn btn-primary rounded-pill d-block text-center">Create Account</a>
+            <a href="../home.blade.php" class="btn btn-primary rounded-pill d-block text-center">Create Account</a>
         </form>
     </div>
     </main>

@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
             ShoppingCartSeeder::class,
             AttributeSeeder::class,
             VariantSeeder::class,
-            CartAttrVarSeeder::class,
             TagSeeder::class,
         ]);
     }

@@ -16,6 +16,7 @@ class Order extends Model
      * @var list<string>
      */
     protected $fillable = [
+        'user_id',
         'first_name',
         'last_name',
         'email',
@@ -29,8 +30,13 @@ class Order extends Model
         'state_of_order',
     ];
 
-    public function shopping_carts()
+    public function users()
     {
-        return $this->hasMany(ShoppingCart::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function order_items()
+    {
+        return $this->hasMany(OrderItems::class);
     }
 }
