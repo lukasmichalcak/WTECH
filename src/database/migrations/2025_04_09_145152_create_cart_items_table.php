@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cart_attr_vars', function (Blueprint $table) {
+        Schema::create('cart_items', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('cart_id');
-            $table->foreign('cart_id')->references('id')->on('shopping_carts');
-            $table->uuid('attribute_id');
-            $table->foreign('attribute_id')->references('id')->on('attributes');
-            $table->uuid('variant_id');
-            $table->foreign('variant_id')->references('id')->on('variants');
+            $table->uuid('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->uuid('product_id');
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->jsonb('selected_variants');
+            $table->integer('amount');
             $table->timestampsTz();
             $table->softDeletesTz();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cart_attr_vars');
+        Schema::dropIfExists('cart_items');
     }
 };

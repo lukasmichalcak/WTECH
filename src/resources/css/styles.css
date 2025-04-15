@@ -5,11 +5,11 @@ html, body {
     margin: 0;
 }
 
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Ensures full viewport height */
-}
+/*.wrapper {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    min-height: 100vh; !* Ensures full viewport height *!*/
+/*}*/
 
 main {
     flex-grow: 1; /* Pushes the footer down when there’s little content */
@@ -35,19 +35,8 @@ footer {
     font-weight: bold;
 }
 
-.nav-link{
-    color: #ffffff;
-    font-size: 24px;
-}
-
-/*.navbar*/
-/* Split the screen in half */
-.split {
-    height: calc(100vh - 75px); /* Full height minus navbar height *!*!*!*/
-    position: fixed;
-    /*top: 75px; !* Start right after navbar *!*/
-    overflow-y: auto; /* Allow scrolling if content is too long */
-    /*padding: 20px 0; !* Add some vertical padding *!*/
+.navbar-icons{
+    color: #fff;
 }
 
 .search-button{
@@ -221,6 +210,11 @@ p.card-price {
     font-weight: bold;
 }
 
+.main-nav-bar {
+    min-height: 100vh;
+    border-right: 1px solid #ddd;
+}
+
 /* Search form - Hidden by default on small screens */
 @media (max-width: 991px) {
     .search-container {
@@ -273,12 +267,12 @@ p.card-price {
 }
 
 
-@media  (min-width: 540px) {
-    .main-nav-bar{
-        width: 280px !important;
+/*@media  (min-width: 540px) {*/
+/*    .main-nav-bar{*/
+/*        width: 280px !important;*/
 
-    }
-}
+/*    }*/
+/*}*/
 
 
 @media (max-width: 539px) {
@@ -287,23 +281,6 @@ p.card-price {
     }
 
 }
-
-/*@media  (max-width: 519px) {*/
-/*    .main-nav-bar{*/
-/*        width: 100%; !important;*/
-/*        !*background-color: red !important;*!*/
-/*        display: flex;*/
-/*    }*/
-/*}*/
-
-/*@media  (max-width: 510px) {*/
-
-/*    .main-nav-bar{*/
-/*        width: 100%; !important;*/
-/*        background-color: red !important;*/
-/*    }*/
-/*}*/
-
 
 .product-card{
     width: 200px;

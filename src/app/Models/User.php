@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Database\Seeders\OrderSeeder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class User extends Authenticatable
 {
-    use HasUuids, SoftDeletes;
+    use HasUuids, SoftDeletes, HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -61,8 +63,13 @@ class User extends Authenticatable
         return $this->hasMany(UserFavourite::class);
     }
 
-    public function shopping_carts()
+    public function cart_items()
     {
-        return $this->hasMany(ShoppingCart::class);
+        return $this->hasMany(CartItem::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

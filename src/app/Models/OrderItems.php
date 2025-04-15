@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Variant extends Model
+class OrderItems extends Model
 {
-    use HasUuids, SoftDeletes, HasFactory;
+    use HasUuids, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -17,13 +16,19 @@ class Variant extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'attribute_id',
-        'name',
+        'order_id',
+        'product_id',
+        'selected_variants',
+        'amount',
     ];
 
-    public function attributes()
+    public function orders()
     {
-        return $this->belongsTo(Attribute::class);
+        return $this->belongsTo(Order::class);
     }
 
+    public function products()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

@@ -275,7 +275,7 @@ p.card-price {
 
 @media  (min-width: 540px) {
     .main-nav-bar{
-        width: 280px; !important;
+        width: 280px !important;
 
     }
 }
