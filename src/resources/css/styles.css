@@ -307,3 +307,7 @@ p.card-price {
 .login-button {
     width: 100%;
 }
+
+.delete-button {
+    background-color: red;
+}
