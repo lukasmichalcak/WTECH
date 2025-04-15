@@ -286,3 +286,24 @@ p.card-price {
     width: 200px;
     height: auto;
 }
+
+
+/*Setting max width for error message when entering incorrect name or password*/
+
+.login-form-container {
+    width: 100%;
+    max-width: 400px; /* Set a fixed max-width */
+}
+
+.login-fields {
+    width: 100%; /* Make fields take full width of container */
+}
+
+.alert {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.login-button {
+    width: 100%;
+}
