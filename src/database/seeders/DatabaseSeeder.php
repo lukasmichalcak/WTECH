@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Tag;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Tag;
 use App\Models\AddressDetails;
 use App\Models\CardDetails;
 
@@ -33,5 +34,9 @@ class DatabaseSeeder extends Seeder
         CardDetails::factory()->count(2)->create([
             'user_id' => $user->id,
         ]);
+
+        User::factory()->count(9)->create();
+        Tag::factory()->count(80)->create();
+        Product::factory()->count(50)->create();
     }
 }
