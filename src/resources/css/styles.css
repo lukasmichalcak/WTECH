@@ -5,11 +5,11 @@ html, body {
     margin: 0;
 }
 
-/*.wrapper {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    min-height: 100vh; !* Ensures full viewport height *!*/
-/*}*/
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures full viewport height */
+}
 
 main {
     flex-grow: 1; /* Pushes the footer down when there’s little content */
@@ -39,7 +39,7 @@ footer {
     color: #fff;
 }
 
-.search-button{
+.navbar-button{
     background-color: white;
     color: #3674b5;
 }

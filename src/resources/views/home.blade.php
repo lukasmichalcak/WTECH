@@ -3,47 +3,7 @@
 @section('title', 'Home')
 
 @section('content')
-<header>
-        <nav class="navbar prometex-color navbar-expand-lg navbar-light bg-light ">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Prometex</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-supported-content" aria-controls="navbar-supported-content" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="navbar-collapse" id="navbar-supported-content">
-
-                    <div class="me-auto"></div>
-
-                    <!-- Search Bar (Properly Responsive) -->
-                    <div class="search-container d-flex">
-
-                        <!-- Search Form -->
-                        <form class="d-flex search-form">
-                            <input class="form-control me-2 search-input" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-light my-0 search-button" type="submit">Search</button>
-                        </form>
-                    </div>
-
-                    <div class="me-auto"></div>
-
-                    <div class="justify-content-center">
-                        <a class="nav-link navbar-icons d-inline-block me-3 fs-4" href="profile-page.html">
-                            <i class="bi bi-person"></i>
-                        </a>
-                        <a class="nav-link navbar-icons d-inline-block position-relative me-3" href="shopping-cart.html">
-                            <i class="bi bi-cart fs-4"></i>
-                            <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle
-                        badge rounded-pill bg-danger cart-badge">3</span>
-                        </a>
-                    </div>
-
-
-                </div>
-
-            </div>
-        </nav>
-    </header>
+@include('layouts.headers.header_with_search')
 
 <div class="container-fluid">
         <div class="row g-0">
@@ -86,9 +46,6 @@
                         </div>
 
                     </div>
-
-
-
 
                     <div class="col-12 p-3" style="background-color: white">
                         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
@@ -157,33 +114,5 @@
         </div>
     </div>
 
-<footer class="py-3 my-4 border-top mb-0 mt-auto">
-
-
-        <div class="container text-center">
-            <div class="row">
-
-                <div class="col">
-                    <a href="#" class="nav-link px-2 text-body-secondary footer-text">Home</a>
-                </div>
-                <div class="col">
-                    <a href="#" class="nav-link px-2 text-body-secondary footer-text">Features</a>
-                </div>
-                <div class="col">
-                    <a href="#" class="nav-link px-2 text-body-secondary footer-text">Pricing</a>
-                </div>
-                <div class="col">
-                    <a href="#" class="nav-link px-2 text-body-secondary footer-text">FAQs</a>
-                </div>
-                <div class="col">
-                    <a href="#" class="nav-link px-2 text-body-secondary footer-text">About</a>
-                </div>
-            </div>
-            <div class="pt-2">
-
-                <p class="mb-0 text-body-secondary company-text-footer">© 2025 Prometex, Inc</p>
-
-            </div>
-        </div>
-    </footer>
+@include('layouts.footers.footer')
 @endsection
