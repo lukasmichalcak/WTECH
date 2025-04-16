@@ -12,7 +12,7 @@
 
                 <h1 class="form-group mt-3">Log in</h1>
 
-                <a href="register-page.html">Don't have an account? Sign up</a>
+                <a href="{{ route('register') }}">Don't have an account? Sign up</a>
 
                 <div class="form-group mt-3 mb-3 login-fields">
                     <label for="exampleInputUsername">Email</label>

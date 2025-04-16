@@ -1,0 +1,16 @@
+First name
+Aurel
+
+Last name:
+Gombala
+
+Username
+AureliusAnime
+
+email:
+aurelo@email.com
+
+password
+AureliusAnime
+
+

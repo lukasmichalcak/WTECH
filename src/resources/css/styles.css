@@ -296,6 +296,7 @@ p.card-price {
 }
 
 .login-fields {
+
     width: 100%; /* Make fields take full width of container */
 }
 
@@ -306,4 +307,10 @@ p.card-price {
 
 .login-button {
     width: 100%;
+}
+
+
+#register-error{
+    margin-top: 20px;
+    max-width: 100%;
 }
