@@ -296,7 +296,6 @@ p.card-price {
 }
 
 .login-fields {
-
     width: 100%; /* Make fields take full width of container */
 }
 
@@ -309,6 +308,9 @@ p.card-price {
     width: 100%;
 }
 
+.delete-button {
+    background-color: red;
+}
 
 #register-error{
     margin-top: 20px;

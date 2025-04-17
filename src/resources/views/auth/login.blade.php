@@ -15,8 +15,8 @@
                 <a href="{{ route('register') }}">Don't have an account? Sign up</a>
 
                 <div class="form-group mt-3 mb-3 login-fields">
-                    <label for="exampleInputUsername">Email</label>
-                    <input type="email" class="form-control" id="exampleInputUsername" name="username" aria-describedby="emailHelp" placeholder="Enter email">
+                    <label for="exampleInputEmail">Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail" name="email" aria-describedby="emailHelp" placeholder="Enter email">
                 </div>
 
                 <div class="form-group mt-3 mb-3 login-fields">

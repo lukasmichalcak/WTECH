@@ -48,10 +48,12 @@
                         <a href="{{ route('login') }}" class="btn btn-outline-light navbar-button me-3">Login</a>
                     @endguest
 
-                    <a class="nav-link navbar-icons d-inline-block position-relative me-3" href="shopping-cart.html">
+                    <a class="nav-link navbar-icons d-inline-block position-relative me-3" href="{{ route('paywall.cart') }}">
                         <i class="bi bi-cart fs-4"></i>
-                        <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle
-                        badge rounded-pill bg-danger cart-badge">3</span>
+                        @if($cartItemsCount > 0)
+                            <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle
+                        badge rounded-pill bg-danger cart-badge">{{ $cartItemsCount }}</span>
+                        @endif
                     </a>
                 </div>
             </div>
