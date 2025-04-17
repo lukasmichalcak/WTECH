@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Header\HeaderController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\UserDetails\UserDetailsController;
@@ -14,6 +15,9 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.s
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
+
+Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
 
 Route::get('/profile', [HeaderController::class, 'profile'])->name('profile')->middleware('auth');
 Route::get('/orders', [HeaderController::class, 'orders'])->name('orders')->middleware('auth');

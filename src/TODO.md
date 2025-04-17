@@ -13,3 +13,6 @@ CartItem::create([
 'quantity' => $entry['quantity'],
 'selected_variants' => json_decode($normalizedVariants, true), // store as array
 ]);
+
+[//]: # (TODO Jozef might have to run command:)
+composer dump-autoload
