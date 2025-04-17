@@ -16,12 +16,12 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'username' => 'required|email', // no spaces
+            'email' => 'required|email',
             'password' => 'required',
         ]);
 
         $loginData = [
-            'email' => $credentials['username'], // map 'username' input to 'email' column
+            'email' => $credentials['email'],
             'password' => $credentials['password'],
         ];
 

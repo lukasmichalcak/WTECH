@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\AddressDetails;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -52,7 +53,7 @@ class RegisterController extends Controller
                 'user_id' => $user->id,
                 'address' => $credentials['address'],
                 'city' => $credentials['city'],
-                'zip_code' => $credentials['zip'], // Note: field name change from 'zip' to 'zip_code'
+                'zip_code' => $credentials['zip'],
                 'country' => $credentials['country'],
             ]);
 
@@ -60,7 +61,9 @@ class RegisterController extends Controller
 
             DB::commit();
 
-            return redirect()->route('login')->with('success', 'Account created successfully! Please log in.');
+            Auth::login($user);
+
+            return redirect()->route('home')->with('success', 'Account created successfully!');
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->withInput()->withErrors(['error' => 'Registration failed: ' . $e->getMessage()]);

@@ -48,7 +48,7 @@
                         <a href="{{ route('login') }}" class="btn btn-outline-light navbar-button me-3">Login</a>
                     @endguest
 
-                    <a class="nav-link navbar-icons d-inline-block position-relative me-3" href="shopping-cart.html">
+                    <a class="nav-link navbar-icons d-inline-block position-relative me-3" href="{{ route('paywall.cart') }}">
                         <i class="bi bi-cart fs-4"></i>
                         @if($cartItemsCount > 0)
                             <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle

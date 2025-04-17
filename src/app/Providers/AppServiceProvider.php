@@ -31,22 +31,23 @@ class AppServiceProvider extends ServiceProvider
                 $sessionCart = session('cart', []);
 
                 // If empty, insert test item
-                if (empty($sessionCart)) {
-                    $productId = '019642c1-cfc8-7270-b98b-0d870af2c3fe';
-                    $variants = [
-                        'Display Size' => '13',
-                        'Ports' => 'HDMI',
-                    ];
-
-                    $key = $productId;
-
-                    $sessionCart[$key] = [
-                        'amount' => 15,
-                        'selected_variants' => $variants,
-                    ];
-
-                    session()->put('cart', $sessionCart);
-                }
+//                if (empty($sessionCart)) {
+//                    $productId = '01964301-47d2-7261-9818-dbfef7e7c8b3';
+//                    $variants = [
+//                        'Resolution' => 'HD',
+//                        'Touchscreen' => 'Yes',
+//                        'RAM' => '8GB',
+//                    ];
+//
+//                    $key = $productId;
+//
+//                    $sessionCart[$key] = [
+//                        'amount' => 15,
+//                        'selected_variants' => $variants,
+//                    ];
+//
+//                    session()->put('cart', $sessionCart);
+//                }
 
                 // Now count items after ensuring session is set
                 $cartItemsCount = count(session('cart', []));
