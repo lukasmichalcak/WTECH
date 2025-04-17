@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Tag;
 use App\Models\AddressDetails;
 use App\Models\CardDetails;
+use App\Models\CartItem;
 
 class DatabaseSeeder extends Seeder
 {
@@ -38,5 +39,24 @@ class DatabaseSeeder extends Seeder
         User::factory()->count(9)->create();
         Tag::factory()->count(80)->create();
         Product::factory()->count(50)->create();
+
+        $products = Product::inRandomOrder()->take(5)->get();
+        foreach ($products as $product) {
+            $selectedVariants = [];
+
+            foreach ($product->attributes as $attribute) {
+                $firstVariant = $attribute->variants()->first();
+                if ($firstVariant) {
+                    $selectedVariants[$attribute->name] = $firstVariant->name;
+                }
+            }
+
+            CartItem::create([
+                'user_id' => $userId,
+                'product_id' => $product->id,
+                'selected_variants' => $selectedVariants,
+                'amount' => rand(1, 3),
+            ]);
+        }
     }
 }

@@ -11,16 +11,24 @@
         <h2 class="fw-bold text-center mb-4">Profile for user: {{ $user->username }}</h2>
 
         <div class="container border rounded-3 p-4 mb-4">
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label class="form-label">First Name</label>
-                    <input type="text" class="form-control" value="{{ $user->first_name }}">
+            <form method="POST" action="{{ route('name.update') }}">
+                @csrf
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">First Name</label>
+                        <input type="text" class="form-control" name="first_name" value="{{ $user->first_name }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Last Name</label>
+                        <input type="text" class="form-control" name="last_name" value="{{ $user->last_name }}">
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <label class="form-label">Last Name</label>
-                    <input type="text" class="form-control" value="{{ $user->last_name }}">
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <button class="btn btn-success rounded-pill mt-3" type="submit">Update Name</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
 
         @foreach ($address_details as $address)

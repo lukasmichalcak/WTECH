@@ -7,6 +7,26 @@ use Illuminate\Http\Request;
 
 class UserDetailsController extends Controller
 {
+    public function updateName(Request $request)
+    {
+        $user = auth()->user();
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'User not found.');
+        }
+
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+        ]);
+
+        $user->update($validated);
+
+        echo $user;
+
+        return redirect()->back()->with('success', 'Name updated.');
+    }
+
     public function updateAddress(Request $request, $id)
     {
         $user = auth()->user();

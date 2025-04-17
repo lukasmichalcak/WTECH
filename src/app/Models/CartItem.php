@@ -21,6 +21,10 @@ class CartItem extends Model
         'amount',
     ];
 
+    protected $casts = [
+        'selected_variants' => 'array',
+    ];
+
     public function users()
     {
         return $this->belongsTo(User::class);

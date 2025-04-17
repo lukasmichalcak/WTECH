@@ -22,6 +22,10 @@ class OrderItems extends Model
         'amount',
     ];
 
+    protected $casts = [
+        'selected_variants' => 'array',
+    ];
+
     public function orders()
     {
         return $this->belongsTo(Order::class);
