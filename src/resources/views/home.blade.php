@@ -9,24 +9,70 @@
         <div class="row g-0">
             <!-- Sidebar -->
             <aside class="col-12 col-md-3 col-lg-2 bg-light main-nav-bar p-3">
-                <ul class="nav nav-pills row">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link active" aria-current="page">
-                            Home</a>
-                    </li>
-                    <li><a href="#" class="nav-link link-dark">
-                            Smartphones</a>
-                    </li>
-                    <li><a href="#" class="nav-link link-dark">
-                            Laptops</a>
-                    </li>
-                    <li><a href="#" class="nav-link link-dark">
-                            TVs</a>
-                    </li>
-                    <li><a href="#" class="nav-link link-dark">
-                            Appliances</a>
-                    </li>
-                </ul>
+
+                <a href="#" class="nav-link link-dark">
+                        Smartphones</a>
+                    <ul>
+                        <li>Apple</li>
+                        <li>Samsung</li>
+                        <li>Xiaomi</li>
+                        <li>GenericMobile</li>
+                    </ul>
+
+
+                <a href="#" class="nav-link link-dark">
+                        Laptops</a>
+                    <ul>
+                        <li>Apple</li>
+                        <li>Asus</li>
+                        <li>Dell</li>
+                        <li>GenericLaptop</li>
+                    </ul>
+
+
+                <a href="#" class="nav-link link-dark">
+                        TVs</a>
+                    <ul>
+                        <li>LG</li>
+                        <li>Samsung</li>
+                        <li>Sony</li>
+                        <li>VisionTech</li>
+                        <li>GenericTV</li>
+                    </ul>
+
+
+                <a href="#" class="nav-link link-dark">
+                        Appliances</a>
+                    <ul>
+                        <li>Whirlpool</li>
+                        <li>Electrolux</li>
+                        <li>Bosch</li>
+                        <li>HomeMaster</li>
+                        <li>GenericAppliance</li>
+                    </ul>
+
+                <a href="#" class="nav-link link-dark">
+                        Accessories</a>
+                    <ul>
+                        <li>Logitech</li>
+                        <li>Razer</li>
+                        <li>Bose</li>
+                        <li>SoundNova</li>
+                        <li>GenericAccessory</li>
+                    </ul>
+
+
+                <a href="#" class="nav-link link-dark">
+                        Components</a>
+                    <ul>
+                        <li>NVIDIA</li>
+                        <li>AMD</li>
+                        <li>Intel</li>
+                        <li>HyperCool</li>
+                        <li>GenericComponent</li>
+                    </ul>
+
+
             </aside>
 
             <!-- Main Content -->
@@ -49,63 +95,27 @@
 
                     <div class="col-12 p-3" style="background-color: white">
                         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
-                            <!-- First card -->
-                            <div class="col">
-                                <div class="card align-items-center h-100">
-                                    <img src="{{ Vite::asset('resources/images/A55.png') }}" class="card-img-top product-card" alt="a55">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Samsung A55 128GB/8GB</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <p>400.99$</p>
-                                        <a href="#" class="card-link"><i class="bi bi-cart-plus"></i></a>
-                                    </div>
+                            @forelse ($products as $product)
+                                <div class="col">
+                                    <a href="{{ url('/product/' . $product->id) }}" class="text-decoration-none text-reset">
+                                        <div class="card align-items-center h-100">
+                                            <!-- If you have an image column in your products table -->
+                                                <img src="{{ Vite::asset('resources/images/GeneratedTV.jpg') }}" class="card-img-top product-card card-img"  alt="product image">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ $product->name }}</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <p>{{ $product->price }}$</p>
+                                                <a href="#" class="card-link" onclick="event.stopPropagation()"><i class="bi bi-cart-plus"></i></a>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </div>
-
-                            <!-- Second card -->
-                            <div class="col">
-                                <div class="card align-items-center h-100">
-                                    <img src="{{ Vite::asset('resources/images/A55.png') }}" class="card-img-top product-card" alt="a55">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Samsung A55 128GB/8GB</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <p>400.99$</p>
-                                        <a href="#" class="card-link"><i class="bi bi-cart-plus"></i></a>
-                                    </div>
+                            @empty
+                                <div class="col-12">
+                                    <p>No products available.</p>
                                 </div>
-                            </div>
-
-                            <!-- Third card -->
-                            <div class="col">
-                                <div class="card align-items-center h-100">
-                                    <img src="{{ Vite::asset('resources/images/A55.png') }}" class="card-img-top product-card" alt="a55" >
-                                    <div class="card-body">
-                                        <h5 class="card-title">Samsung A55 128GB/8GB</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <p>400.99$</p>
-                                        <a href="#" class="card-link"><i class="bi bi-cart-plus"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col">
-                                <div class="card align-items-center h-100">
-                                    <img src="{{ Vite::asset('resources/images/A55.png') }}" class="card-img-top product-card" alt="a55" >
-                                    <div class="card-body">
-                                        <h5 class="card-title">Samsung A55 128GB/8GB</h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <p>400.99$</p>
-                                        <a href="#" class="card-link"><i class="bi bi-cart-plus"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
+                            @endforelse
                         </div>
                     </div>
 
