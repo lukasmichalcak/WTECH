@@ -21,7 +21,7 @@ class Attribute extends Model
         'name',
     ];
 
-    public function products()
+    public function product()
     {
         return $this->belongsTo(Product::class);
     }

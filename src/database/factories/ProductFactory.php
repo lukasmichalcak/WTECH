@@ -40,7 +40,7 @@ class ProductFactory extends Factory
             'type' => $type,
             'subtype' => $subtype,
             'price' => $this->faker->randomFloat(2, 199, 2999),
-            'stock' => $this->faker->numberBetween(0, 100),
+            'stock' => $this->faker->numberBetween(50, 200),
             'brand' => $this->faker->randomElement(['ASUS', 'Apple', 'Dell', 'Samsung', 'HP', 'Lenovo']),
         ];
     }

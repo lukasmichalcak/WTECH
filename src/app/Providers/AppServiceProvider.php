@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CartItem;
+use App\Models\Product;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,23 +32,26 @@ class AppServiceProvider extends ServiceProvider
                 $sessionCart = session('cart', []);
 
                 // If empty, insert test item
-//                if (empty($sessionCart)) {
-//                    $productId = '01964301-47d2-7261-9818-dbfef7e7c8b3';
-//                    $variants = [
-//                        'Resolution' => 'HD',
-//                        'Touchscreen' => 'Yes',
-//                        'RAM' => '8GB',
-//                    ];
-//
-//                    $key = $productId;
-//
-//                    $sessionCart[$key] = [
-//                        'amount' => 15,
-//                        'selected_variants' => $variants,
-//                    ];
-//
-//                    session()->put('cart', $sessionCart);
-//                }
+                if (empty($sessionCart)) {
+                    $product = Product::inRandomOrder()->first();
+                    $selectedVariants = [];
+
+                    foreach ($product->attributes as $attribute) {
+                        $firstVariant = $attribute->variants()->first();
+                        if ($firstVariant) {
+                            $selectedVariants[$attribute->name] = $firstVariant->name;
+                        }
+                    }
+
+                    $key = $product->id;
+
+                    $sessionCart[$key] = [
+                        'amount' => intdiv($product->stock, 2),
+                        'selected_variants' => $selectedVariants,
+                    ];
+
+                    session()->put('cart', $sessionCart);
+                }
 
                 // Now count items after ensuring session is set
                 $cartItemsCount = count(session('cart', []));

@@ -42,6 +42,8 @@ Route::get('/invoice', [InvoiceController::class, 'invoice'])->name('paywall.inv
 Route::get('/shipping', [ShippingController::class, 'shipping'])->name('paywall.shipping');
 Route::get('/payment', [PaymentController::class, 'payment'])->name('paywall.payment');
 
+Route::post('/cart/increase', [CartController::class, 'increase'])->name('cart.increase');
+Route::post('/cart/decrease', [CartController::class, 'decrease'])->name('cart.decrease');
 
 //DEBUG SESSION
 Route::get('/debug-session', function () {
