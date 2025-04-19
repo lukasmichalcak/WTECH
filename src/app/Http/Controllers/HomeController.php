@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Product;
 
 class HomeController
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        return view('home');
+
+        $products = DB::table('products')->paginate(8);
+
+        return view('home', compact('products'));
+//        return view('home');
     }
 
     /**

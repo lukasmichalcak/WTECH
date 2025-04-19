@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\productsListController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -12,10 +13,14 @@ use App\Http\Controllers\Paywall\CartController;
 use App\Http\Controllers\Paywall\InvoiceController;
 use App\Http\Controllers\Paywall\ShippingController;
 use App\Http\Controllers\Paywall\PaymentController;
+use App\Http\Controllers\ProductPageController;
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+Route::get('/product/{id}', [ProductPageController::class, 'show'])->name('product.show');
+Route::get('/products-list', [productsListController::class, 'show'])->name('products.list');
+
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -23,8 +28,9 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 
-Route::get('/profile', [HeaderController::class, 'profile'])->name('profile')->middleware('auth');
-Route::get('/orders', [HeaderController::class, 'orders'])->name('orders')->middleware('auth');
+
+Route::get('/profile', [HeaderController::class, 'profile'])->name('profile');
+Route::get('/orders', [HeaderController::class, 'orders'])->name('orders');
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 Route::post('/user/name/update', [UserDetailsController::class, 'updateName'])->name('name.update');
@@ -49,3 +55,7 @@ Route::post('/cart/decrease', [CartController::class, 'decrease'])->name('cart.d
 Route::get('/debug-session', function () {
     return response()->json(session()->all());
 });
+
+
+
+
