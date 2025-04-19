@@ -36,7 +36,28 @@
                 <!-- Right Section (50% or 6/12) -->
                 <div class="col-md-5 content-section">
                     <h2>{{ $product->name }}</h2>
+                    <h3>{{ $product->brand }}</h3>
                     <p>{{ $product->description}}</p>
+
+
+                    <div class="mt-3">
+                        <h3 style="color: red">Product Tags</h3>
+{{--                        <div class="d-flex flex-wrap gap-2">--}}
+{{--                            <span class="badge bg-light text-dark">MacBook Pro</span>--}}
+{{--                            <span class="badge bg-light text-dark">Apple</span>--}}
+{{--                            <span class="badge bg-light text-dark">M4 Chip</span>--}}
+{{--                            <span class="badge bg-light text-dark">14-inch</span>--}}
+{{--                            <span class="badge bg-light text-dark">Space Black</span>--}}
+{{--                        </div>--}}
+
+                        @forelse ($tags as $tag)
+                            <span class="badge bg-light text-dark">{{ $tag->name }}</span>
+                        @empty
+                            <span class="badge bg-light text-dark">no tag</span>
+                        @endforelse
+
+
+                    </div>
 
                     <div class="ms-2">
 
