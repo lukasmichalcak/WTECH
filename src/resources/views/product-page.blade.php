@@ -33,7 +33,7 @@
 
                 </div>
 
-                <!-- Right Section (50% or 6/12) -->
+                <!-- Right Section (50% or 6/12)aaa -->
                 <div class="col-md-5 content-section">
                     <h2>{{ $product->name }}</h2>
                     <h3>{{ $product->brand }}</h3>
