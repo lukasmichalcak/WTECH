@@ -26,6 +26,8 @@ class Product extends Model
         'brand',
     ];
 
+    
+
     public function user_favourites()
     {
         return $this->hasMany(UserFavourite::class);

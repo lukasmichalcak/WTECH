@@ -47,7 +47,6 @@ class RegisterController extends Controller
                 'password' => Hash::make($credentials['password']),
             ]);
 
-
             // Create address details with relationship to user
             AddressDetails::create([
                 'user_id' => $user->id,
@@ -56,7 +55,6 @@ class RegisterController extends Controller
                 'zip_code' => $credentials['zip'],
                 'country' => $credentials['country'],
             ]);
-
 
 
             DB::commit();
