@@ -16,10 +16,11 @@
                 <div class="search-container d-flex mx-auto">
 
                     <!-- Search Form -->
-                    <form class="d-flex search-form">
-                        <input class="form-control me-2 search-input" type="search" placeholder="Search" aria-label="Search">
+                    <form class="d-flex search-form" method="GET" action="{{ route('products.list') }}">
+                        <input class="form-control me-2 search-input" type="search" name="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-light my-0 navbar-button" type="submit">Search</button>
                     </form>
+
                 </div>
 
                 <div class="justify-items-center align-items-center d-flex">
