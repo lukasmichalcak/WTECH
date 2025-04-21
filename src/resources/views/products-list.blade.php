@@ -10,6 +10,9 @@
         <div class="row g-0">
 
             <div class="col">
+
+
+{{--                Price filter--}}
                 <div class="container border-bottom py-3">
                     <div class="row g-4 row-cols-sm-1 row-cols-md-3 row-cols-xl-6 justify-content-center">
                         <div class="col-2">
@@ -19,6 +22,14 @@
 
 
                             <form method="GET" action="{{ route('products.list') }}">
+
+
+                                <input type="hidden" name="search" value="{{ request('search') }}">
+                                <input type="hidden" name="brand" value="{{ request('brand') }}">
+                                <input type="hidden" name="minStock" value="{{ request('minStock') }}">
+                                <input type="hidden" name="sort" value="{{ request('sort') }}">
+                                <input type="hidden" name="type" value="{{ request('type') }}">
+
                             <div class="modal fade" id="priceModal" tabindex="-1" aria-labelledby="priceModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content rounded-4">
@@ -35,7 +46,7 @@
                                             <label for="maxPrice" class="form-label">Maximum Price</label>
                                             <input type="number" class="form-control" id="maxPrice" name="maxPrice" placeholder="e.g. 100" value="{{ request('maxPrice') }}">
 
-                                            <input type="hidden" name="search" value="{{ request('search') }}">
+
 
                                         </div>
                                         <div class="modal-footer">
@@ -50,7 +61,7 @@
 
                         </div>
 
-
+{{--                        Brand Filter--}}
                         <div class="col-2">
                             <form id="brandFilterForm" method="GET" action="{{ route('products.list') }}">
 
@@ -58,6 +69,9 @@
                                 <input type="hidden" name="search" value="{{ request('search') }}">
                                 <input type="hidden" name="minPrice" value="{{ request('minPrice') }}">
                                 <input type="hidden" name="maxPrice" value="{{ request('maxPrice') }}">
+                                <input type="hidden" name="minStock" value="{{ request('minStock') }}">
+                                <input type="hidden" name="sort" value="{{ request('sort') }}">
+                                <input type="hidden" name="type" value="{{ request('type') }}">
 
                                 <select class="form-select rounded-pill fw-bold" name="brand" aria-label="Filter by Brand" onchange="this.form.submit()">
                                     <option value="" {{ !request('brand') ? 'selected' : '' }}>All Brands</option>
@@ -70,77 +84,77 @@
                             </form>
                         </div>
 
+
+
+{{--                        Stock filter--}}
                         <div class="col-2">
-                            <button class="form-select rounded-pill fw-bold text-start" data-bs-toggle="modal" data-bs-target="#tagsModal">
-                                Tags
+                            <button class="form-select rounded-pill fw-bold text-start" data-bs-toggle="modal" data-bs-target="#stockModal">
+                                Stock
                             </button>
-                            <div class="modal fade" id="tagsModal" tabindex="-1" aria-labelledby="tagsModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content rounded-4">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="tagsModalLabel">Add Tags</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
 
-                                        <div class="modal-body">
-                                            <!-- Tag Input -->
-                                            <div class="input-group mb-3">
-                                                <label for="tagInput"></label><input type="text" id="tagInput" class="form-control" placeholder="Enter a tag">
-                                                <button class="btn btn-outline-primary" id="addTagButton" type="button">Add</button>
+                            <form method="GET" action="{{ route('products.list') }}">
+
+
+                                <input type="hidden" name="search" value="{{ request('search') }}">
+                                <input type="hidden" name="brand" value="{{ request('brand') }}">
+                                <input type="hidden" name="minPrice" value="{{ request('minPrice') }}">
+                                <input type="hidden" name="maxPrice" value="{{ request('maxPrice') }}">
+                                <input type="hidden" name="sort" value="{{ request('sort') }}">
+                                <input type="hidden" name="type" value="{{ request('type') }}">
+
+
+                                <div class="modal fade" id="stockModal" tabindex="-1" aria-labelledby="stockModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content rounded-4">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="stockModalLabel">Filter by stock</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
+                                            <div class="modal-body">
 
-                                            <!-- Tag List -->
-                                            <div class="mt-4">
-                                                <h6 class="mb-2">Selected Tags:</h6>
-                                                <div id="tagList" class="d-flex flex-wrap gap-2">
-                                                    <!-- Tags will appear here -->
-                                                </div>
+
+                                                <label for="minStock" class="form-label">Minimum Stock</label>
+                                                <input type="number" class="form-control mb-3" id="minStock" name="minStock" placeholder="e.g. 5" value="{{ request('minStock') }}">
+
+
                                             </div>
-
-                                            <!-- Available tags-->
-                                            <div class="mt-4">
-                                                <h6 class="mb-2">Suggested Tags:</h6>
-                                                <div id="suggestedTags" class="d-flex flex-wrap gap-2">
-                                                    <!-- Tags will be inserted here -->
-                                                </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                <button type=submit class="btn btn-primary" data-bs-dismiss="modal">Apply</button>
                                             </div>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Apply</button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </form>
 
                         </div>
+
                         <div class="col-2">
-                            <select class="form-select rounded-pill fw-bold" aria-label="Filter by Colour">
-                                <option value="" disabled selected hidden>Color</option>
-                                <option value="Color 1">Color 1</option>
-                                <option value="Color 2">Color 2</option>
-                                <option value="Color 3">Color 3</option>
-                            </select>
+
+                            <form id="SortingFilterForm" method="GET" action="{{ route('products.list') }}">
+                                <input type="hidden" name="search" value="{{ request('search') }}">
+                                <input type="hidden" name="minPrice" value="{{ request('minPrice') }}">
+                                <input type="hidden" name="maxPrice" value="{{ request('maxPrice') }}">
+                                <input type="hidden" name="minStock" value="{{ request('minStock') }}">
+                                <input type="hidden" name="type" value="{{ request('type') }}">
+
+
+
+                                <select class="form-select rounded-pill fw-bold" name="sort" aria-label="Sort items" onchange="this.form.submit()">
+                                    <option value="" {{ !request('sort') ? 'selected' : '' }}>Sort</option>
+                                    <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>A-Z</option>
+                                    <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>Z-A</option>
+                                </select>
+
+
+                            </form>
                         </div>
-                        <div class="col-2">
-                            <select class="form-select rounded-pill fw-bold" aria-label="Filter by Availability">
-                                <option value="" disabled selected hidden>Availability</option>
-                                <option value="In stock">In stock</option>
-                                <option value="All">All</option>
-                            </select>
-                        </div>
-                        <div class="col-2">
-                            <select class="form-select rounded-pill fw-bold" aria-label="Sort items">
-                                <option value="" disabled selected hidden>Sort</option>
-                                <option value="A-Z">A-Z</option>
-                                <option value="Z-A">Z-A</option>
-                                <option value="Newest">Newest</option>
-                                <option value="Oldest">Oldest</option>
-                            </select>
+
                         </div>
                     </div>
                 </div>
+
+
 
                 <div class="row g-0" style="padding: 0">
                     <div class="col-12 p-3" style="background-color: white">
@@ -184,7 +198,7 @@
                         </a>
                     </li>
                     @php
-                        $currentSearch = request('search'); // get current search if present
+                        $currentSearch = request('search'); // get current search if presenta
                     @endphp
 
                     @for ($i = 1; $i <= 7; $i++)
@@ -196,13 +210,11 @@
                     <a class="page-link" href="#" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
-                    </li>
+
                 </ul>
             </nav>
 
         </div>
-    </div>
-
 
     @include('layouts.footers.footer')
 @endsection

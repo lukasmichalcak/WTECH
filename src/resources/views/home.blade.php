@@ -20,13 +20,14 @@
                     </ul>
 
 
-                <a href="#" class="nav-link link-dark">
+                <a href="{{ route('products.list', ['type' => 'laptop']) }}" class="nav-link link-dark">
                         Laptops</a>
                     <ul>
-                        <li>Apple</li>
-                        <li>Asus</li>
-                        <li>Dell</li>
-                        <li>GenericLaptop</li>
+{{--                        <li><a href="{{ url('/products-list') }}?brand=Apple">Apple</a></li>--}}
+                        <li><a href="{{ route('products.list', ['brand' => 'Apple','type' => 'laptop']) }}">MacBook</a></li>
+                        <li><a href="{{ route('products.list', ['brand' => 'Dell', 'type' => 'laptop']) }}">Dell</a></li>
+                        <li><a href="{{ route('products.list', ['brand' => 'HP', 'type' => 'laptop']) }}">HP</a></li>
+
                     </ul>
 
 
