@@ -27,6 +27,8 @@
                                 <input type="hidden" name="search" value="{{ request('search') }}">
                                 <input type="hidden" name="brand" value="{{ request('brand') }}">
                                 <input type="hidden" name="minStock" value="{{ request('minStock') }}">
+                                <input type="hidden" name="sort" value="{{ request('sort') }}">
+                                <input type="hidden" name="type" value="{{ request('type') }}">
 
                             <div class="modal fade" id="priceModal" tabindex="-1" aria-labelledby="priceModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -68,6 +70,8 @@
                                 <input type="hidden" name="minPrice" value="{{ request('minPrice') }}">
                                 <input type="hidden" name="maxPrice" value="{{ request('maxPrice') }}">
                                 <input type="hidden" name="minStock" value="{{ request('minStock') }}">
+                                <input type="hidden" name="sort" value="{{ request('sort') }}">
+                                <input type="hidden" name="type" value="{{ request('type') }}">
 
                                 <select class="form-select rounded-pill fw-bold" name="brand" aria-label="Filter by Brand" onchange="this.form.submit()">
                                     <option value="" {{ !request('brand') ? 'selected' : '' }}>All Brands</option>
@@ -95,6 +99,8 @@
                                 <input type="hidden" name="brand" value="{{ request('brand') }}">
                                 <input type="hidden" name="minPrice" value="{{ request('minPrice') }}">
                                 <input type="hidden" name="maxPrice" value="{{ request('maxPrice') }}">
+                                <input type="hidden" name="sort" value="{{ request('sort') }}">
+                                <input type="hidden" name="type" value="{{ request('type') }}">
 
 
                                 <div class="modal fade" id="stockModal" tabindex="-1" aria-labelledby="stockModalLabel" aria-hidden="true">
@@ -121,7 +127,27 @@
                                 </div>
                             </form>
 
+                        </div>
 
+                        <div class="col-2">
+
+                            <form id="SortingFilterForm" method="GET" action="{{ route('products.list') }}">
+                                <input type="hidden" name="search" value="{{ request('search') }}">
+                                <input type="hidden" name="minPrice" value="{{ request('minPrice') }}">
+                                <input type="hidden" name="maxPrice" value="{{ request('maxPrice') }}">
+                                <input type="hidden" name="minStock" value="{{ request('minStock') }}">
+                                <input type="hidden" name="type" value="{{ request('type') }}">
+
+
+
+                                <select class="form-select rounded-pill fw-bold" name="sort" aria-label="Sort items" onchange="this.form.submit()">
+                                    <option value="" {{ !request('sort') ? 'selected' : '' }}>Sort</option>
+                                    <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>A-Z</option>
+                                    <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>Z-A</option>
+                                </select>
+
+
+                            </form>
                         </div>
 
                         </div>
