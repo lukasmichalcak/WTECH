@@ -19,6 +19,10 @@
 
         <div class="row row-cols-1 gy-2 ps-5 pe-5">
             @foreach($cartItems as $cartItem)
+                @php
+                    $variantHash = normalizeVariants($cartItem->selected_variants);
+                @endphp
+
                 <div class="col my-card border">
                     <div class="row row-cols-2 row-cols-md-4 align-items-center m-2">
                         <div class="col">
@@ -40,9 +44,11 @@
 
                         <div class="col">
                             <div class="d-flex align-items-center gap-2">
-                                <button class="btn btn-outline-secondary decrease-amount" data-id="{ {$cartItem->product_id }}">−</button>
+                                <button class="btn btn-outline-secondary decrease-amount"
+                                        data-id="{{$cartItem->product_id }}" data-variant="{{ $variantHash }}">−</button>
                                 <span class="px-3 fs-5 fw-bold border rounded amount-value">{{ $cartItem->amount }}</span>
-                                <button class="btn btn-outline-secondary increase-amount" data-id="{{ $cartItem->product_id }}">+</button>
+                                <button class="btn btn-outline-secondary increase-amount"
+                                        data-id="{{ $cartItem->product_id }}" data-variant="{{ $variantHash }}">+</button>
                             </div>
                         </div>
                     </div>
@@ -77,6 +83,7 @@
 <script>
     document.querySelectorAll('.my-card').forEach(card => {
         const productId = card.querySelector('.increase-amount')?.dataset.id;
+        const variantHash = card.querySelector('.increase-amount')?.dataset.variant;
         const amountDisplay = card.querySelector('.amount-value');
 
         const update = (type) => {
@@ -86,7 +93,10 @@
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
-                body: JSON.stringify({ product_id: productId })
+                body: JSON.stringify({
+                    product_id: productId,
+                    variant_hash: variantHash,
+                })
             })
                 .then(res => res.json())
                 .then(data => {

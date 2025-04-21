@@ -56,6 +56,8 @@ Route::post('/shipping/store', [ShippingController::class, 'store'])->name('ship
 Route::post('/payment/store', [PaymentController::class, 'store'])->name('payment.store');
 Route::post('/payment/finalize', [PaymentController::class, 'finalize'])->name('payment.finalize');
 
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+
 //DEBUG SESSION
 Route::get('/debug-session', function () {
     return response()->json(session()->all());

@@ -125,4 +125,14 @@
     </div>
 
 @include('layouts.footers.footer')
+@if (session('order_success'))
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                alert("{{ session('order_success') }}\nWe will inform you about its state via your email");
+            }, 200);
+        });
+    </script>
+@endif
+
 @endsection

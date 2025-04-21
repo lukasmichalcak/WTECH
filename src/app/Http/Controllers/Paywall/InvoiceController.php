@@ -28,16 +28,21 @@ class InvoiceController extends Controller
 
         } else {
             $cart = session()->get('cart', []);
-            $productIds = array_keys($cart);
-            $products = Product::whereIn('id', $productIds)->get();
+            $compositeKeys = array_keys($cart);
+            $productIds = collect($compositeKeys)->map(function ($key) {
+                return explode('::', $key)[0];
+            })->unique()->values();
 
-            $cartItems = $products->map(function ($product) use ($cart) {
-                $cartItem = new CartItem(); // create an instance without saving
+            $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
 
-                $cartItem->product_id = $product->id;
-                $cartItem->product = $product; // set relationship manually
-                $cartItem->amount = $cart[$product->id]['amount'] ?? null;
-                $cartItem->selected_variants = $cart[$product->id]['selected_variants'] ?? [];
+            $cartItems = collect($cart)->map(function ($entry, $compositeKey) use ($products) {
+                [$productId, $variantHash] = explode('::', $compositeKey);
+
+                $cartItem = new CartItem();
+                $cartItem->product_id = $productId;
+                $cartItem->product = $products[$productId] ?? null;
+                $cartItem->amount = $entry['amount'] ?? 0;
+                $cartItem->selected_variants = $entry['selected_variants'] ?? [];
 
                 return $cartItem;
             });

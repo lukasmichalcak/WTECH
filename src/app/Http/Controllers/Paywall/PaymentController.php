@@ -28,16 +28,21 @@ class PaymentController extends Controller
 
         } else {
             $cart = session()->get('cart', []);
-            $productIds = array_keys($cart);
-            $products = Product::whereIn('id', $productIds)->get();
+            $compositeKeys = array_keys($cart);
+            $productIds = collect($compositeKeys)->map(function ($key) {
+                return explode('::', $key)[0];
+            })->unique()->values();
 
-            $cartItems = $products->map(function ($product) use ($cart) {
-                $cartItem = new CartItem(); // create an instance without saving
+            $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
 
-                $cartItem->product_id = $product->id;
-                $cartItem->product = $product; // set relationship manually
-                $cartItem->amount = $cart[$product->id]['amount'] ?? null;
-                $cartItem->selected_variants = $cart[$product->id]['selected_variants'] ?? [];
+            $cartItems = collect($cart)->map(function ($entry, $compositeKey) use ($products) {
+                [$productId, $variantHash] = explode('::', $compositeKey);
+
+                $cartItem = new CartItem();
+                $cartItem->product_id = $productId;
+                $cartItem->product = $products[$productId] ?? null;
+                $cartItem->amount = $entry['amount'] ?? 0;
+                $cartItem->selected_variants = $entry['selected_variants'] ?? [];
 
                 return $cartItem;
             });
@@ -77,12 +82,17 @@ class PaymentController extends Controller
         $user = auth()->user();
         $userId = $user?->id;
 
+        $cart = session()->get('cart', []);
+        $compositeKeys = array_keys($cart);
+
         $cartItems = auth()->check()
             ? CartItem::with('product')->where('user_id', $userId)->get()
-            : collect(session('cart', []))->map(function ($data, $id) {
-                $product = Product::find($id);
+            : collect(session('cart', []))->map(function ($data, $compositeKey) {
+                [$productId, $variantHash] = explode('::', $compositeKey, 2);
+                $product = Product::find($productId);
+
                 $cartItem = new CartItem();
-                $cartItem->product_id = $id;
+                $cartItem->product_id = $productId;
                 $cartItem->product = $product;
                 $cartItem->amount = $data['amount'];
                 $cartItem->selected_variants = $data['selected_variants'] ?? [];
@@ -131,6 +141,6 @@ class PaymentController extends Controller
             CartItem::where('user_id', $userId)->delete();
         }
 
-        return redirect()->route('home')->with('success', 'Order placed successfully!');
+        return redirect()->route('home')->with('order_success', 'Order placed successfully!');
     }
 }

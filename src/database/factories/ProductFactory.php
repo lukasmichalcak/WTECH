@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Product;
 use App\Models\Attribute;
+use App\Models\Variant;
 use App\Models\Tag;
 
 /**
@@ -48,11 +49,29 @@ class ProductFactory extends Factory
     public function configure(): static
     {
         return $this->afterCreating(function ($product) {
-            Attribute::factory()
-                ->count(rand(2, 5))
-                ->create([
+            $usedAttributes = [];
+
+            // Get all available attribute names
+            $allAttributeNames = array_keys(AttributeFactory::$attributeVariants);
+            shuffle($allAttributeNames); // Randomize the order
+
+            // Pick a random number of unique attribute names
+            $chosenNames = array_slice($allAttributeNames, 0, rand(2, 5));
+
+            foreach ($chosenNames as $name) {
+                $attribute = Attribute::create([
                     'product_id' => $product->id,
+                    'name' => $name,
                 ]);
+
+                // Attach variants for the attribute
+                foreach (AttributeFactory::$attributeVariants[$name] as $variantName) {
+                    Variant::create([
+                        'attribute_id' => $attribute->id,
+                        'name' => $variantName,
+                    ]);
+                }
+            }
 
             $tags = Tag::inRandomOrder()->limit(rand(1, 3))->pluck('id');
             $product->tags()->attach($tags);

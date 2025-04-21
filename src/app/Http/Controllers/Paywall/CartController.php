@@ -21,32 +21,103 @@ class CartController extends Controller
 
         } else {
             $cart = session()->get('cart', []);
-            $productIds = array_keys($cart);
-            $products = Product::whereIn('id', $productIds)->get();
+            $items = collect($cart)->values();
+            $productIds = collect($items)->pluck('product_id')->unique();
+            $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
 
-            $cartItems = $products->map(function ($product) use ($cart) {
-                $cartItem = new CartItem(); // create an instance without saving
-
-                $cartItem->product_id = $product->id;
-                $cartItem->product = $product; // set relationship manually
-                $cartItem->amount = $cart[$product->id]['amount'] ?? null;
-                $cartItem->selected_variants = $cart[$product->id]['selected_variants'] ?? [];
-
+            $cartItems = $items->map(function ($entry) use ($products) {
+                $cartItem = new CartItem();
+                $cartItem->product_id = $entry['product_id'];
+                $cartItem->product = $products[$entry['product_id']] ?? null;
+                $cartItem->amount = $entry['amount'] ?? 1;
+                $cartItem->selected_variants = $entry['selected_variants'] ?? [];
                 return $cartItem;
             });
+
             Log::debug($cartItems);
-            $total = $cartItems->sum(fn($item) => $item->amount * $item->product->price);
+            $total = $cartItems->sum(fn($item) => $item->amount * ($item->product->price ?? 0));
         }
 
-        return view('paywall.cart',[
+        return view('paywall.cart', [
             'cartItems' => $cartItems,
             'cartTotal' => $total
+        ]);
+    }
+
+    public function add(Request $request)
+    {
+        $data = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'selected_variants' => 'required|array',
+        ]);
+
+        $data['amount'] = 1;
+        $product = Product::findOrFail($data['product_id']);
+        $normalizedVariants = normalizeVariants($data['selected_variants']);
+
+        if (auth()->check()) {
+            $existing = CartItem::where('user_id', auth()->id())
+                ->where('product_id', $data['product_id'])
+                ->get()
+                ->first(function ($item) use ($normalizedVariants) {
+                    return normalizeVariants($item->selected_variants) === $normalizedVariants;
+                });
+
+            if ($existing) {
+                if ($existing->amount + 1 > $product->stock) {
+                    return response()->json(['success' => false, 'message' => 'Not enough stock.']);
+                }
+
+                $existing->increment('amount');
+                return response()->json(['success' => true]);
+            }
+
+            if ($product->stock < 1) {
+                return response()->json(['success' => false, 'message' => 'Out of stock.']);
+            }
+
+            CartItem::create([
+                'user_id' => auth()->id(),
+                'product_id' => $data['product_id'],
+                'selected_variants' => $data['selected_variants'],
+                'amount' => 1,
             ]);
+
+            return response()->json(['success' => true, 'newItem' => true]);
+        }
+
+        // For guests
+        $cart = session()->get('cart', []);
+        $key = $data['product_id'] . '::' . $normalizedVariants;
+
+        if (isset($cart[$key])) {
+            $cart[$key]['amount'] += 1;
+            session(['cart' => $cart]);
+
+            return response()->json(['success' => true]);
+
+        } else {
+            if ($product->stock < 1) {
+                return response()->json(['success' => false, 'message' => 'Out of stock.']);
+            }
+
+            $cart[$key] = [
+                'product_id' => $data['product_id'],
+                'selected_variants' => $data['selected_variants'],
+                'amount' => 1,
+            ];
+            session(['cart' => $cart]);
+
+            return response()->json(['success' => true, 'newItem' => true]);
+        }
     }
 
     public function increase(Request $request): JsonResponse
     {
         $productId = $request->input('product_id');
+        $variantHash = $request->input('variant_hash');
+        $compositeKey = "{$productId}::{$variantHash}";
+
         $product = Product::findOrFail($productId);
 
         if (auth()->check()) {
@@ -71,20 +142,20 @@ class CartController extends Controller
         }
 
         $cart = session()->get('cart', []);
-        if (isset($cart[$productId]) && $cart[$productId]['amount'] < $product->stock) {
-            $cart[$productId]['amount']++;
-            session()->put('cart', $cart);
+        if (isset($cart[$compositeKey]) && $cart[$compositeKey]['amount'] < $product->stock) {
+            $cart[$compositeKey]['amount']++;
+            session(['cart' => $cart]);
         }
 
-        $productIds = array_keys($cart);
+        $productIds = collect($cart)->pluck('product_id')->unique();
         $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
 
-        $total = collect($cart)->reduce(function ($carry, $entry, $id) use ($products) {
-            return $carry + (($entry['amount'] ?? 0) * ($products[$id]->price ?? 0));
+        $total = collect($cart)->reduce(function ($carry, $entry) use ($products) {
+            return $carry + (($entry['amount'] ?? 0) * ($products[$entry['product_id']]->price ?? 0));
         }, 0);
 
         return response()->json([
-            'amount' => $cart[$productId]['amount'] ?? 0,
+            'amount' => $cart[$compositeKey]['amount'] ?? 0,
             'cartTotal' => $total,
         ]);
     }
@@ -92,6 +163,8 @@ class CartController extends Controller
     public function decrease(Request $request): JsonResponse
     {
         $productId = $request->input('product_id');
+        $variantHash = $request->input('variant_hash');
+        $compositeKey = "{$productId}::{$variantHash}";
 
         if (auth()->check()) {
             $item = CartItem::where('user_id', auth()->id())
@@ -132,40 +205,27 @@ class CartController extends Controller
         }
 
         $cart = session()->get('cart', []);
-        if (isset($cart[$productId])) {
-            $cart[$productId]['amount']--;
 
-            if ($cart[$productId]['amount'] <= 0) {
-                unset($cart[$productId]);
-                session()->put('cart', $cart);
+        if (isset($cart[$compositeKey])) {
+            $cart[$compositeKey]['amount']--;
 
-                $newCount = count($cart);
-
-                $productIds = array_keys($cart);
-                $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
-
-                $total = collect($cart)->reduce(function ($carry, $entry, $id) use ($products) {
-                    return $carry + (($entry['amount'] ?? 0) * ($products[$id]->price ?? 0));
-                }, 0);
-
-                return response()->json([
-                    'removed' => true,
-                    'cartItemsCount' => $newCount,
-                    'cartTotal' => $total,
-                ]);
+            if ($cart[$compositeKey]['amount'] <= 0) {
+                unset($cart[$compositeKey]);
             }
 
-            session()->put('cart', $cart);
+            session(['cart' => $cart]);
 
-            $productIds = array_keys($cart);
+            $productIds = collect($cart)->pluck('product_id')->unique();
             $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
 
-            $total = collect($cart)->reduce(function ($carry, $entry, $id) use ($products) {
-                return $carry + (($entry['amount'] ?? 0) * ($products[$id]->price ?? 0));
+            $total = collect($cart)->reduce(function ($carry, $entry) use ($products) {
+                return $carry + (($entry['amount'] ?? 0) * ($products[$entry['product_id']]->price ?? 0));
             }, 0);
 
             return response()->json([
-                'amount' => $cart[$productId]['amount'],
+                'removed' => !isset($cart[$compositeKey]),
+                'amount' => $cart[$compositeKey]['amount'] ?? 0,
+                'cartItemsCount' => count($cart),
                 'cartTotal' => $total,
             ]);
         }

@@ -31,28 +31,6 @@ class AppServiceProvider extends ServiceProvider
             } else {
                 $sessionCart = session('cart', []);
 
-                // If empty, insert test item
-                if (empty($sessionCart)) {
-                    $product = Product::inRandomOrder()->first();
-                    $selectedVariants = [];
-
-                    foreach ($product->attributes as $attribute) {
-                        $firstVariant = $attribute->variants()->first();
-                        if ($firstVariant) {
-                            $selectedVariants[$attribute->name] = $firstVariant->name;
-                        }
-                    }
-
-                    $key = $product->id;
-
-                    $sessionCart[$key] = [
-                        'amount' => intdiv($product->stock, 2),
-                        'selected_variants' => $selectedVariants,
-                    ];
-
-                    session()->put('cart', $sessionCart);
-                }
-
                 // Now count items after ensuring session is set
                 $cartItemsCount = count(session('cart', []));
             }
