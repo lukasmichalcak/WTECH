@@ -68,18 +68,12 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Country</label>
-                                <select class="form-select" name="country">
-                                    <option value="">Choose...</option>
-                                    <option value="Slovakia">Slovakia</option>
-                                    <option value="Czech Republic">Czech Republic</option>
-                                    <option value="Germany">Germany</option>
-                                    <option value="Other">Other</option>
-                                </select>
+                                <label class="form-label">Country</label>
+                                <input type="text" class="form-control" name="country" placeholder="Slovakia">
 
                             </div>
                         </div>
 
-{{--                        <a href="home-page.html" class="btn btn-primary rounded-pill d-block text-center">Create Account</a>--}}
                         <button type="submit" class="btn btn-primary rounded-pill d-block text-center login-button">Create Account</button>
 
                 </div>

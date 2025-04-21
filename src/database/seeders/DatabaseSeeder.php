@@ -37,8 +37,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->count(9)->create();
-        Tag::factory()->count(80)->create();
-        Product::factory()->count(50)->create();
+        Tag::factory()->count(150)->create();
+        Product::factory()->count(1000)->create();
 
         $products = Product::inRandomOrder()->take(5)->get();
         foreach ($products as $product) {

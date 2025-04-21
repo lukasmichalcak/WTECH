@@ -79,9 +79,9 @@ class CartController extends Controller
         $productIds = array_keys($cart);
         $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
 
-        $total = collect($cart)->sum(function ($entry) use ($products) {
-            return ($entry['amount'] ?? 0) * ($products[$entry['product_id']]->price ?? 0);
-        });
+        $total = collect($cart)->reduce(function ($carry, $entry, $id) use ($products) {
+            return $carry + (($entry['amount'] ?? 0) * ($products[$id]->price ?? 0));
+        }, 0);
 
         return response()->json([
             'amount' => $cart[$productId]['amount'] ?? 0,
@@ -144,9 +144,9 @@ class CartController extends Controller
                 $productIds = array_keys($cart);
                 $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
 
-                $total = collect($cart)->sum(function ($entry) use ($products) {
-                    return ($entry['amount'] ?? 0) * ($products[$entry['product_id']]->price ?? 0);
-                });
+                $total = collect($cart)->reduce(function ($carry, $entry, $id) use ($products) {
+                    return $carry + (($entry['amount'] ?? 0) * ($products[$id]->price ?? 0));
+                }, 0);
 
                 return response()->json([
                     'removed' => true,
@@ -160,9 +160,9 @@ class CartController extends Controller
             $productIds = array_keys($cart);
             $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
 
-            $total = collect($cart)->sum(function ($entry) use ($products) {
-                return ($entry['amount'] ?? 0) * ($products[$entry['product_id']]->price ?? 0);
-            });
+            $total = collect($cart)->reduce(function ($carry, $entry, $id) use ($products) {
+                return $carry + (($entry['amount'] ?? 0) * ($products[$id]->price ?? 0));
+            }, 0);
 
             return response()->json([
                 'amount' => $cart[$productId]['amount'],
