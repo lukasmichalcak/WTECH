@@ -198,7 +198,7 @@
                         </a>
                     </li>
                     @php
-                        $currentSearch = request('search'); // get current search if present
+                        $currentSearch = request('search'); // get current search if presenta
                     @endphp
 
                     @for ($i = 1; $i <= 7; $i++)
