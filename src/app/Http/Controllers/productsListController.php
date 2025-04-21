@@ -16,6 +16,7 @@ class productsListController
         $minPrice = $request->input('minPrice');
         $maxPrice = $request->input('maxPrice');
         $brand = $request->input('brand');
+        $minStock = $request->input('minStock');
 
         // Base query
         $baseQuery = DB::table('products')
@@ -30,6 +31,9 @@ class productsListController
             })
             ->when($brand, function ($query, $brand) {
                 return $query->where('brand', 'like', '%' . $brand . '%');
+            })
+            ->when($minStock, function ($query, $minStock) {
+                return $query->where('stock', '>=', $minStock);
             });
 
         // Pagination
