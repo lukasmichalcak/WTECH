@@ -51,6 +51,11 @@ Route::get('/payment', [PaymentController::class, 'payment'])->name('paywall.pay
 Route::post('/cart/increase', [CartController::class, 'increase'])->name('cart.increase');
 Route::post('/cart/decrease', [CartController::class, 'decrease'])->name('cart.decrease');
 
+Route::post('/invoice/store', [InvoiceController::class, 'store'])->name('invoice.store');
+Route::post('/shipping/store', [ShippingController::class, 'store'])->name('shipping.store');
+Route::post('/payment/store', [PaymentController::class, 'store'])->name('payment.store');
+Route::post('/payment/finalize', [PaymentController::class, 'finalize'])->name('payment.finalize');
+
 //DEBUG SESSION
 Route::get('/debug-session', function () {
     return response()->json(session()->all());

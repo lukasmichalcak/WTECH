@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Paywall;
 
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Models\CartItem;
 use App\Models\Product;
@@ -51,4 +52,22 @@ class InvoiceController extends Controller
             'cartTotal' => $total
         ]);
     }
+
+    public function store(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|email',
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'zip_code' => 'required|string',
+            'country' => 'required|string',
+        ]);
+
+        session(['checkout.invoice' => $validated]);
+
+        return response()->json(['success' => true]);
+    }
+
 }

@@ -38,7 +38,7 @@
                             <p class="card-price fw-bold mb-0">{{ $cartItem->product->price }}$</p>
                         </div>
 
-                        <div class="col my-card-stepper">
+                        <div class="col">
                             <div class="d-flex align-items-center gap-2">
                                 <button class="btn btn-outline-secondary decrease-amount" data-id="{ {$cartItem->product_id }}">−</button>
                                 <span class="px-3 fs-5 fw-bold border rounded amount-value">{{ $cartItem->amount }}</span>
@@ -52,7 +52,7 @@
 
         <div class="row justify-content-end ps-5 pe-5 p-2">
             <div class="col-auto border text-end">
-                <p id="cart-total" class="card-price">Sum total: {{ $cartTotal }}$</p>
+                <p id="cart-total" class="card-price">Products sum: {{ $cartTotal }}$</p>
             </div>
         </div>
 
@@ -107,7 +107,7 @@
 
                     const totalDisplay = document.getElementById('cart-total');
                     if (totalDisplay && data.cartTotal !== undefined) {
-                        totalDisplay.textContent = `Sum total:${data.cartTotal.toFixed(2)}$`;
+                        totalDisplay.textContent = `Products sum: ${data.cartTotal.toFixed(2)}$`;
                     }
                 });
         };
