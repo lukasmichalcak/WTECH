@@ -27,7 +27,7 @@
 
                         <div class="col">
                             <h5 class="card-title mb-0">{{ $cartItem->product->name }}</h5>
-                            @foreach(sortVariants($cartItem->selected_variants) as $attribute => $variant)
+                            @foreach(sortVariants( $cartItem->selected_variants) as $attribute => $variant)
                                 <span>
                                     {{ $attribute }}: {{ $variant }}<br>
                                 </span>
@@ -35,12 +35,12 @@
                         </div>
 
                         <div class="col">
-                            <p class="card-price fw-bold mb-0">{{ $cartItem->product->price }} $</p>
+                            <p class="card-price fw-bold mb-0">{{ $cartItem->product->price }}$</p>
                         </div>
 
                         <div class="col my-card-stepper">
                             <div class="d-flex align-items-center gap-2">
-                                <button class="btn btn-outline-secondary decrease-amount" data-id="{{ $cartItem->product_id }}">−</button>
+                                <button class="btn btn-outline-secondary decrease-amount" data-id="{ {$cartItem->product_id }}">−</button>
                                 <span class="px-3 fs-5 fw-bold border rounded amount-value">{{ $cartItem->amount }}</span>
                                 <button class="btn btn-outline-secondary increase-amount" data-id="{{ $cartItem->product_id }}">+</button>
                             </div>
@@ -52,7 +52,7 @@
 
         <div class="row justify-content-end ps-5 pe-5 p-2">
             <div class="col-auto border text-end">
-                <p id="cart-total" class="card-price">Sum total: {{ $cartTotal }} $</p>
+                <p id="cart-total" class="card-price">Sum total: {{ $cartTotal }}$</p>
             </div>
         </div>
 
@@ -107,7 +107,7 @@
 
                     const totalDisplay = document.getElementById('cart-total');
                     if (totalDisplay && data.cartTotal !== undefined) {
-                        totalDisplay.textContent = `Sum total: ${data.cartTotal.toFixed(2)}$`;
+                        totalDisplay.textContent = `Sum total:${data.cartTotal.toFixed(2)}$`;
                     }
                 });
         };
