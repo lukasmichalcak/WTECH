@@ -10,13 +10,12 @@
             <!-- Sidebar -->
             <aside class="col-12 col-md-3 col-lg-2 bg-light main-nav-bar p-3">
 
-                <a href="#" class="nav-link link-dark">
+                <a href="{{ route('products.list', ['type' => 'smartphone']) }}" class="nav-link link-dark">
                         Smartphones</a>
                     <ul>
-                        <li>Apple</li>
-                        <li>Samsung</li>
-                        <li>Xiaomi</li>
-                        <li>GenericMobile</li>
+                        <li><a class="nav-link link-dark" href="{{ route('products.list', ['brand' => 'Apple','type' => 'smartphone']) }}">IPhones</a></li>
+                        <li><a class="nav-link link-dark" href="{{ route('products.list', ['brand' => 'Samsung','type' => 'smartphone']) }}">Samsung</a></li>
+
                     </ul>
 
 
@@ -24,54 +23,31 @@
                         Laptops</a>
                     <ul>
 {{--                        <li><a href="{{ url('/products-list') }}?brand=Apple">Apple</a></li>--}}
-                        <li><a href="{{ route('products.list', ['brand' => 'Apple','type' => 'laptop']) }}">MacBook</a></li>
-                        <li><a href="{{ route('products.list', ['brand' => 'Dell', 'type' => 'laptop']) }}">Dell</a></li>
-                        <li><a href="{{ route('products.list', ['brand' => 'HP', 'type' => 'laptop']) }}">HP</a></li>
+                        <li><a class="nav-link link-dark" href="{{ route('products.list', ['brand' => 'Apple','type' => 'laptop']) }}">MacBook</a></li>
+                        <li><a class="nav-link link-dark" href="{{ route('products.list', ['brand' => 'Dell', 'type' => 'laptop']) }}">Dell</a></li>
+                        <li><a class="nav-link link-dark"  href="{{ route('products.list', ['brand' => 'HP', 'type' => 'laptop']) }}">HP</a></li>
 
                     </ul>
 
 
-                <a href="#" class="nav-link link-dark">
-                        TVs</a>
+                <a href="{{ route('products.list', ['type' => 'monitor']) }}" class="nav-link link-dark">
+                        Monitor</a>
                     <ul>
-                        <li>LG</li>
-                        <li>Samsung</li>
-                        <li>Sony</li>
-                        <li>VisionTech</li>
-                        <li>GenericTV</li>
+                        <li><a class="nav-link link-dark" href="{{ route('products.list', ['brand' => 'LG','type' => 'monitor']) }}">LG</a></li>
+                        <li><a class="nav-link link-dark" href="{{ route('products.list', ['brand' => 'Samsung','type' => 'monitor']) }}">Samsung</a></li>
                     </ul>
 
 
-                <a href="#" class="nav-link link-dark">
-                        Appliances</a>
-                    <ul>
-                        <li>Whirlpool</li>
-                        <li>Electrolux</li>
-                        <li>Bosch</li>
-                        <li>HomeMaster</li>
-                        <li>GenericAppliance</li>
-                    </ul>
+                <a href="{{ route('products.list', ['type' => 'Router']) }}" class="nav-link link-dark">
+                        Router</a>
+{{--                    <ul>--}}
+{{--                        <li>Whirlpool</li>--}}
+{{--                        <li>Electrolux</li>--}}
+{{--                        <li>Bosch</li>--}}
+{{--                        <li>HomeMaster</li>--}}
+{{--                        <li>GenericAppliance</li>--}}
+{{--                    </ul>--}}
 
-                <a href="#" class="nav-link link-dark">
-                        Accessories</a>
-                    <ul>
-                        <li>Logitech</li>
-                        <li>Razer</li>
-                        <li>Bose</li>
-                        <li>SoundNova</li>
-                        <li>GenericAccessory</li>
-                    </ul>
-
-
-                <a href="#" class="nav-link link-dark">
-                        Components</a>
-                    <ul>
-                        <li>NVIDIA</li>
-                        <li>AMD</li>
-                        <li>Intel</li>
-                        <li>HyperCool</li>
-                        <li>GenericComponent</li>
-                    </ul>
 
 
             </aside>
