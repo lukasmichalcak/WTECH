@@ -18,86 +18,47 @@
         </nav>
 
         <div class="row row-cols-1 gy-2 ps-5 pe-5">
-            <!-- First card -->
-            <div class="col my-card border">
-                <div class="row row-cols-2 row-cols-md-4 align-items-center m-2">
-                    <div class="col">
-                        <img src="{{ Vite::asset('resources/images/A55.png') }}" class="img-thumbnail img-fluid" alt="a55" style="max-width: 100px;">
-                    </div>
+            @foreach($cartItems as $cartItem)
+                @php
+                    $variantHash = normalizeVariants($cartItem->selected_variants);
+                @endphp
 
-                    <div class="col">
-                        <h5 class="card-title mb-0">Samsung A55 128GB/8GB</h5>
-                    </div>
+                <div class="col my-card border">
+                    <div class="row row-cols-2 row-cols-md-4 align-items-center m-2">
+                        <div class="col">
+                            <img src="{{ Vite::asset('resources/images/A55.png') }}" class="img-thumbnail img-fluid" alt="a55" style="max-width: 100px;">
+                        </div>
 
-                    <div class="col">
-                        <p class="card-price fw-bold mb-0">400.99$</p>
-                    </div>
+                        <div class="col">
+                            <h5 class="card-title mb-0">{{ $cartItem->product->name }}</h5>
+                            @foreach(sortVariants( $cartItem->selected_variants) as $attribute => $variant)
+                                <span>
+                                    {{ $attribute }}: {{ $variant }}<br>
+                                </span>
+                            @endforeach
+                        </div>
 
-                    <div class="col my-card-stepper">
-                        <div class="d-flex align-items-center gap-2">
-                            <button class="btn btn-outline-secondary decrease-amount">−</button>
-                            <span class="px-3 fs-5 fw-bold border rounded amount-value">1</span>
-                            <button class="btn btn-outline-secondary increase-amount">+</button>
+                        <div class="col">
+                            <p class="card-price fw-bold mb-0">{{ $cartItem->product->price }}$</p>
+                        </div>
+
+                        <div class="col">
+                            <div class="d-flex align-items-center gap-2">
+                                <button class="btn btn-outline-secondary decrease-amount"
+                                        data-id="{{$cartItem->product_id }}" data-variant="{{ $variantHash }}">−</button>
+                                <span class="px-3 fs-5 fw-bold border rounded amount-value">{{ $cartItem->amount }}</span>
+                                <button class="btn btn-outline-secondary increase-amount"
+                                        data-id="{{ $cartItem->product_id }}" data-variant="{{ $variantHash }}">+</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Second card -->
-            <div class="col my-card border">
-                <div class="row row-cols-2 row-cols-md-4 align-items-center m-2">
-                    <div class="col">
-                        <img src="{{ Vite::asset('resources/images/A55.png') }}" class="img-thumbnail img-fluid" alt="a55" style="max-width: 100px;">
-                    </div>
-
-                    <div class="col">
-                        <h5 class="card-title mb-0">Samsung A55 128GB/8GB</h5>
-                    </div>
-
-                    <div class="col">
-                        <p class="card-price fw-bold mb-0">400.99$</p>
-                    </div>
-
-                    <div class="col my-card-stepper">
-                        <div class="d-flex align-items-center gap-2">
-                            <button class="btn btn-outline-secondary decrease-amount">−</button>
-                            <span class="px-3 fs-5 fw-bold border rounded amount-value">1</span>
-                            <button class="btn btn-outline-secondary increase-amount">+</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Third card -->
-            <div class="col my-card border">
-                <div class="row row-cols-2 row-cols-md-4 align-items-center m-2">
-                    <div class="col">
-                        <img src="{{ Vite::asset('resources/images/A55.png') }}" class="img-thumbnail img-fluid" alt="a55" style="max-width: 100px;">
-                    </div>
-
-                    <div class="col">
-                        <h5 class="card-title mb-0">Samsung A55 128GB/8GB</h5>
-                    </div>
-
-                    <div class="col">
-                        <p class="card-price fw-bold mb-0">400.99$</p>
-                    </div>
-
-                    <div class="col my-card-stepper">
-                        <div class="d-flex align-items-center gap-2">
-                            <button class="btn btn-outline-secondary decrease-amount">−</button>
-                            <span class="px-3 fs-5 fw-bold border rounded amount-value">1</span>
-                            <button class="btn btn-outline-secondary increase-amount">+</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            @endforeach
         </div>
 
         <div class="row justify-content-end ps-5 pe-5 p-2">
             <div class="col-auto border text-end">
-                <p class="card-price">Sum total: 400.99$</p>
+                <p id="cart-total" class="card-price">Products sum: {{ $cartTotal }}$</p>
             </div>
         </div>
 
@@ -119,4 +80,50 @@
 </main>
 
 @include('layouts.footers.footer')
+<script>
+    document.querySelectorAll('.my-card').forEach(card => {
+        const productId = card.querySelector('.increase-amount')?.dataset.id;
+        const variantHash = card.querySelector('.increase-amount')?.dataset.variant;
+        const amountDisplay = card.querySelector('.amount-value');
+
+        const update = (type) => {
+            fetch(`{{ url('/cart') }}/${type}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    product_id: productId,
+                    variant_hash: variantHash,
+                })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.removed) {
+                        card.remove();
+
+                        const badge = document.getElementById('cart-badge');
+                        if (badge) {
+                            if (data.cartItemsCount > 0) {
+                                badge.textContent = data.cartItemsCount;
+                            } else {
+                                badge.remove();
+                            }
+                        }
+                    } else {
+                        amountDisplay.textContent = data.amount;
+                    }
+
+                    const totalDisplay = document.getElementById('cart-total');
+                    if (totalDisplay && data.cartTotal !== undefined) {
+                        totalDisplay.textContent = `Products sum: ${data.cartTotal.toFixed(2)}$`;
+                    }
+                });
+        };
+
+        card.querySelector('.increase-amount')?.addEventListener('click', () => update('increase'));
+        card.querySelector('.decrease-amount')?.addEventListener('click', () => update('decrease'));
+    });
+</script>
 @endsection

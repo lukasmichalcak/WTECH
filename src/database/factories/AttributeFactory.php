@@ -19,7 +19,7 @@ class AttributeFactory extends Factory
      *
      * @var array<string, string[]>
      */
-    private static array $attributeVariants = [
+    public static array $attributeVariants = [
         "Color" => ["Black", "White", "Silver", "Space Gray", "Midnight Blue"],
         "RAM" => ["4GB", "8GB", "16GB", "32GB", "64GB"],
         "Storage" => ["128GB", "256GB", "512GB", "1TB", "2TB"],

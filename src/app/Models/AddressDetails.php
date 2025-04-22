@@ -24,7 +24,7 @@ class AddressDetails extends Model
         'country',
     ];
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }

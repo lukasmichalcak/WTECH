@@ -198,11 +198,6 @@ body{
     color: #3674b5;
 }
 
-/*!* Order Summary container*!*/
-/*.ord-sum-container {*/
-/*    display: grid;*/
-/*}*/
-
 p.card-price {
     font-size: 20px;
     margin-top: 0;
@@ -320,4 +315,17 @@ p.card-price {
 .card-img{
     padding-top: 10px;
     border-radius: 10%;
+}
+
+/*For progressbar*/
+ .progress-33 {
+     width: 33%;
+ }
+
+.progress-66 {
+    width: 66%;
+}
+
+.progress-100 {
+    width: 100%;
 }

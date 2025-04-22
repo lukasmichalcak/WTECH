@@ -48,6 +48,15 @@ Route::get('/invoice', [InvoiceController::class, 'invoice'])->name('paywall.inv
 Route::get('/shipping', [ShippingController::class, 'shipping'])->name('paywall.shipping');
 Route::get('/payment', [PaymentController::class, 'payment'])->name('paywall.payment');
 
+Route::post('/cart/increase', [CartController::class, 'increase'])->name('cart.increase');
+Route::post('/cart/decrease', [CartController::class, 'decrease'])->name('cart.decrease');
+
+Route::post('/invoice/store', [InvoiceController::class, 'store'])->name('invoice.store');
+Route::post('/shipping/store', [ShippingController::class, 'store'])->name('shipping.store');
+Route::post('/payment/store', [PaymentController::class, 'store'])->name('payment.store');
+Route::post('/payment/finalize', [PaymentController::class, 'finalize'])->name('payment.finalize');
+
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
 
 //DEBUG SESSION
 Route::get('/debug-session', function () {

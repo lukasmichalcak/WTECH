@@ -26,14 +26,17 @@ class MergeCartAfterLogin
         $user = $event->user;
         $sessionCart = session('cart', []);
 
-        foreach ($sessionCart as $productId => $data) {
-            $normalizedVariants = normalizeVariants($data['selected_variants']);
+        foreach ($sessionCart as $key => $data) {
+            [$productId, $variantSignature] = explode('::', $key);
+
+            Log::debug($variantSignature);
 
             $existing = CartItem::where('user_id', $user->id)
                 ->where('product_id', $productId)
                 ->get()
-                ->first(function ($item) use ($normalizedVariants) {
-                    return normalizeVariants($item->selected_variants) === $normalizedVariants;
+                ->first(function ($item) use ($variantSignature) {
+                    Log::debug(normalizeVariants($item->selected_variants));
+                    return normalizeVariants($item->selected_variants) === $variantSignature;
                 });
 
 
@@ -52,7 +55,6 @@ class MergeCartAfterLogin
             }
         }
 
-        // Clear session cart after merge
         session()->forget('cart');
     }
 }

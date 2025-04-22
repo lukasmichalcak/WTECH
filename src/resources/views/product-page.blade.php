@@ -80,7 +80,7 @@
 
                         <h3 class="mt-5 price">{{ $product->price }}</h3>
 
-                        <button type="button" class="btn btn-secondary btn-sm add-cart-btn"> Add to cart   <i class="bi bi-cart-plus"></i></button>
+                        <button id="add-cart-btn" type="button" class="btn btn-secondary btn-sm add-cart-btn"> Add to cart <i class="bi bi-cart-plus"></i></button>
 
                         <h4 class="mt-1"   id="stock-left">Stocks left: {{ $product->stock}}</h4>
 
@@ -91,35 +91,90 @@
 
 
     @include('layouts.footers.footer')
-@endsection
+    <script>
 
-<script>
+        window.onload = function () {
 
-    window.onload = function () {
-
-        const attributeGroups = document.querySelectorAll('.attribute-variants');
+            const attributeGroups = document.querySelectorAll('.attribute-variants');
 
 
-        attributeGroups.forEach(function (group) {
+            attributeGroups.forEach(function (group) {
 
-            // Find all buttons within this specific attribute group only
-            const groupButtons = group.querySelectorAll('.color-btn');
+                // Find all buttons within this specific attribute group only
+                const groupButtons = group.querySelectorAll('.color-btn');
 
-            // Add click event listener to each button in this specific group
-            groupButtons.forEach(function (btn) {
-                btn.addEventListener('click', function () {
+                // Add click event listener to each button in this specific group
+                groupButtons.forEach(function (btn) {
+                    btn.addEventListener('click', function () {
 
-                    groupButtons.forEach(function (b) {
-                        b.classList.remove('btn-primary');
-                        b.classList.add('btn-secondary');
+                        groupButtons.forEach(function (b) {
+                            b.classList.remove('btn-primary');
+                            b.classList.add('btn-secondary');
+                        });
+
+                        // Set the clicked button to btn-primary
+                        this.classList.remove('btn-secondary');
+                        this.classList.add('btn-primary');
                     });
-
-                    // Set the clicked button to btn-primary
-                    this.classList.remove('btn-secondary');
-                    this.classList.add('btn-primary');
                 });
             });
-        });
-    };
-</script>
+        };
+    </script>
+    <script>
+        document.getElementById('add-cart-btn')?.addEventListener('click', () => {
+            const productId = "{{ $product->id }}";
+            const selectedVariants = {};
 
+            document.querySelectorAll('.attribute-variants').forEach(group => {
+                const activeBtn = group.querySelector('.btn-primary');
+                if (activeBtn) {
+                    const attributeName = group.previousElementSibling?.textContent.trim(); // Assuming attribute name is above
+                    const variantName = activeBtn.textContent.trim();
+                    if (attributeName && variantName) {
+                        selectedVariants[attributeName] = variantName;
+                    }
+                }
+            });
+
+            fetch("{{ route('cart.add') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                },
+                body: JSON.stringify({
+                    product_id: productId,
+                    selected_variants: selectedVariants
+                })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        if (data.newItem) {
+                            const badge = document.getElementById('cart-badge');
+                            if (badge) {
+                                const currentCount = parseInt(badge.textContent) || 0;
+                                badge.textContent = currentCount + 1;
+                            }
+                            else {
+                                const cartIcon = document.querySelector('.bi-cart');
+
+                                if (cartIcon) {
+                                    const span = document.createElement('span');
+                                    span.id = 'cart-badge';
+                                    span.className = 'position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-badge';
+                                    span.textContent = '1';
+                                    cartIcon.parentNode.appendChild(span);
+                                }
+                            }
+                        }
+                    } else {
+                        alert("Failed to add product.");
+                    }
+                })
+                .catch(() => {
+                    alert("Something went wrong.");
+                });
+        });
+    </script>
+@endsection

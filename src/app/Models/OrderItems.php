@@ -26,12 +26,12 @@ class OrderItems extends Model
         'selected_variants' => 'array',
     ];
 
-    public function orders()
+    public function order()
     {
         return $this->belongsTo(Order::class);
     }
 
-    public function products()
+    public function product()
     {
         return $this->belongsTo(Product::class);
     }
