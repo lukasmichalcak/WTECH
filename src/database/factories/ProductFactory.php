@@ -24,7 +24,7 @@ class ProductFactory extends Factory
     {
         $types = [
             'Laptop' => ['Ultrabook', 'Gaming', 'Business', '2-in-1'],
-            'Phone' => ['Flagship', 'Budget', 'Foldable', 'Gaming'],
+            'Smartphone' => ['Flagship', 'Budget', 'Foldable', 'Gaming'],
             'Tablet' => ['Standard', 'Pro', 'Drawing Tablet'],
             'Monitor' => ['4K', 'Gaming', 'Ultrawide', 'Curved'],
             'Smartwatch' => ['Fitness', 'Luxury', 'Kids', 'Sports'],
