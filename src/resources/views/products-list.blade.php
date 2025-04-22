@@ -198,12 +198,22 @@
                         </a>
                     </li>
                     @php
-                        $currentSearch = request('search'); // get current search if presenta
+//                        $currentSearch = request('search'); // get current search if presenta
+                     // Get all current request parameters except 'page'
+                        $queryParams = request()->all();
+                        // Remove 'page' from the parameters if it exists
+                            if (isset($queryParams['page'])) {
+                                unset($queryParams['page']);
+                            }
                     @endphp
 
                     @for ($i = 1; $i <= 7; $i++)
-                        <li class="page-item">
-                            <a class="page-link" href="{{ route('products.list', ['page' => $i, 'search' => $currentSearch]) }}">{{ $i }}</a>
+{{--                        <li class="page-item">--}}
+{{--                            <a class="page-link" href="{{ route('products.list', ['page' => $i, 'search' => $currentSearch]) }}">{{ $i }}</a>--}}
+{{--                        </li>--}}
+
+                        <li class="page-item {{ request()->input('page', 1) == $i ? 'active' : '' }}">
+                            <a class="page-link" href="{{ route('products.list', array_merge($queryParams, ['page' => $i])) }}">{{ $i }}</a>
                         </li>
                     @endfor
 
