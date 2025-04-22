@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\productsListController;
+use App\Http\Controllers\ProductListController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -19,7 +19,7 @@ use App\Http\Controllers\ProductPageController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/product/{id}', [ProductPageController::class, 'show'])->name('product.show');
-Route::get('/products-list', [productsListController::class, 'show'])->name('products.list');
+Route::get('/products/list', [ProductListController::class, 'show'])->name('products.list');
 
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
