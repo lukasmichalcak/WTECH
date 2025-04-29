@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tags', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name')->unique();
+            $table->string('path')->unique();
             $table->timestampsTz();
             $table->softDeletesTz();
         });
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tags');
+        Schema::dropIfExists('images');
     }
 };

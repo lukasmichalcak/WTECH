@@ -26,7 +26,7 @@ class Product extends Model
         'brand',
     ];
 
-    
+
 
     public function user_favourites()
     {
@@ -48,8 +48,8 @@ class Product extends Model
         return $this->hasMany(Attribute::class);
     }
 
-    public function tags()
+    public function images()
     {
-        return $this->belongsToMany(Tag::class)->withTimestamps();
+        return $this->belongsToMany(Image::class)->withTimestamps();
     }
 }

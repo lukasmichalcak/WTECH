@@ -4,9 +4,11 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
+
 use App\Models\User;
 use App\Models\Product;
-use App\Models\Tag;
+use App\Models\Image;
 use App\Models\AddressDetails;
 use App\Models\CardDetails;
 use App\Models\CartItem;
@@ -37,7 +39,16 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->count(9)->create();
-        Tag::factory()->count(150)->create();
+
+        $imageFiles = File::files(resource_path('images'));
+
+        foreach ($imageFiles as $file) {
+            $filename = $file->getFilename();
+
+            // Only insert if it doesn't already exist (safety check for reruns)
+            Image::firstOrCreate(['path' => $filename]);
+        }
+
         Product::factory()->count(1000)->create();
 
         $products = Product::inRandomOrder()->take(5)->get();

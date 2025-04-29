@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Tag extends Model
+class Image extends Model
 {
     use HasUuids, SoftDeletes, HasFactory;
 
@@ -17,7 +17,7 @@ class Tag extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'path',
     ];
 
     public function products()
