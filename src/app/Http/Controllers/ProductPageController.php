@@ -28,27 +28,7 @@ class ProductPageController extends Controller
                 ->get();
         }
 
+        return view('product-page', compact('product', 'attributes'));
 
-        $tags = DB::table('tags')
-            ->join('product_tag', 'tags.id', '=', 'product_tag.tag_id')
-            ->where('product_tag.product_id', $product->id)
-            ->select('tags.*')
-            ->get();
-
-
-        return view('product-page', compact('product', 'attributes','tags'));
-
-    }
-
-    public function getProductTags($productId)
-    {
-        // Get all tags for this product in a single query
-        $tags = DB::table('tags')
-            ->join('product_tag', 'tags.id', '=', 'product_tag.tag_id')
-            ->where('product_tag.product_id', $productId)
-            ->select('tags.*')
-            ->get();
-
-        return $tags;
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Product;
 use App\Models\Attribute;
 use App\Models\Variant;
-use App\Models\Tag;
+use App\Models\Image;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
@@ -73,8 +73,9 @@ class ProductFactory extends Factory
                 }
             }
 
-            $tags = Tag::inRandomOrder()->limit(rand(1, 3))->pluck('id');
-            $product->tags()->attach($tags);
+            $product->images()->attach(
+                Image::inRandomOrder()->limit(3)->pluck('id')
+            );
         });
     }
 

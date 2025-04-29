@@ -133,6 +133,7 @@
 
                             <form id="SortingFilterForm" method="GET" action="{{ route('products.list') }}">
                                 <input type="hidden" name="search" value="{{ request('search') }}">
+                                <input type="hidden" name="brand" value="{{ request('brand') }}">
                                 <input type="hidden" name="minPrice" value="{{ request('minPrice') }}">
                                 <input type="hidden" name="maxPrice" value="{{ request('maxPrice') }}">
                                 <input type="hidden" name="minStock" value="{{ request('minStock') }}">
