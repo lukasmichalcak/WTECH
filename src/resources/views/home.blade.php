@@ -30,7 +30,7 @@
                     </ul>
 
 
-                <a href="{{ route('products.list', ['type' => 'monitor']) }}" class="nav-link link-dark">
+                <a href="{{ route('products.list', ['type' => 'Monitor']) }}" class="nav-link link-dark">
                         Monitor</a>
                     <ul>
                         <li><a class="nav-link link-dark" href="{{ route('products.list', ['brand' => 'LG','type' => 'Monitor']) }}">LG</a></li>
@@ -40,15 +40,6 @@
 
                 <a href="{{ route('products.list', ['type' => 'Router']) }}" class="nav-link link-dark">
                         Router</a>
-{{--                    <ul>--}}
-{{--                        <li>Whirlpool</li>--}}
-{{--                        <li>Electrolux</li>--}}
-{{--                        <li>Bosch</li>--}}
-{{--                        <li>HomeMaster</li>--}}
-{{--                        <li>GenericAppliance</li>--}}
-{{--                    </ul>--}}
-
-
 
             </aside>
 
@@ -77,7 +68,8 @@
                                     <a href="{{ url('/product/' . $product->id) }}" class="text-decoration-none text-reset">
                                         <div class="card align-items-center h-100">
                                             <!-- If you have an image column in your products table -->
-                                                <img src="{{ Vite::asset('resources/images/GeneratedTV.jpg') }}" class="card-img-top product-card card-img"  alt="product image">
+                                            <img src="{{ asset('resources/images/' . $product->image_path) }}" class="card-img-top product-card card-img" alt="product image">
+
                                             <div class="card-body">
                                                 <h5 class="card-title">{{ $product->name }}</h5>
                                             </div>

@@ -13,23 +13,35 @@
                 <div class="col-md-7 content-section">
 
                     <!-- Main Image -->
-                    <img id="main-image" src="{{ Vite::asset('resources/images/LaptopMainImage.jpg')}}" class="main-img img-fluid shadow" alt="Main Product Image">
+                    @if(count($images) > 0)
+                        <img id="main-image" src="{{ asset('resources/images/' . $images[0]->path) }}" class="main-img img-fluid shadow" alt="{{ $product->name }}">
+                    @else
+                        <img id="main-image" src="{{ Vite::asset('resources/images/placeholder.png') }}" class="main-img img-fluid shadow" alt="Product image not available">
+                    @endif
 
                     <!-- Thumbnail Images -->
                     <div class="container px-0">
                         <div class="row row-cols-md-3 row-cols-lg-6 gx-0">
-                            <div class="col-2">
-                                <img src="{{ Vite::asset('resources/images/LaptopImage1.jpg')}}" class="img-thumbnail" onclick="changeImage('../static/images/MacBookPro_1.png')" alt="Thumbnail 0">
-                            </div>
-                            <div class="col-2">
-                                <img src="{{ Vite::asset('resources/images/LaptopImage2.png')}}" class="img-thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 1">
-                            </div>
-                            <div class="col-2">
-                                <img src="{{ Vite::asset('resources/images/LaptopImage3.jpg')}}" class="img-thumbnail" onclick="changeImage('../static/images/MacBookPro_2.jpg')" alt="Thumbnail 2">
-                            </div>
-
+                            @forelse($images as $index => $image)
+                                <div class="col-2">
+                                    <img src="{{ asset('resources/images/' . $image->path) }}"
+                                         class="img-thumbnail"
+                                         onclick="changeImage('{{ asset('resources/images/' . $image->path) }}')"
+                                         alt="{{ $product->name }} - Image {{ $index + 1 }}">
+                                </div>
+                            @empty
+                                <div class="col-6">
+                                    <p>No product images available</p>
+                                </div>
+                            @endforelse
                         </div>
                     </div>
+
+                    <script>
+                        function changeImage(newImageSrc) {
+                            document.getElementById('main-image').src = newImageSrc;
+                        }
+                    </script>
 
                 </div>
 

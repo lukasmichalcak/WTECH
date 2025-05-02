@@ -156,38 +156,35 @@
                 </div>
 
 
+            <div class="row g-0" style="padding: 0">
+                <div class="col-12 p-3" style="background-color: white">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+                        @forelse ($products as $product)
+                            <div class="col">
 
-                <div class="row g-0" style="padding: 0">
-                    <div class="col-12 p-3" style="background-color: white">
-                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+                                <a href="{{ url(Auth::check() && Auth::user()->is_admin ? '/product-admin/' . $product->id : '/product/' . $product->id) }}" class="text-decoration-none text-reset">
 
-
-                            @forelse ($products as $product)
-                                <div class="col">
-                                    <a href="{{ url('/product/' . $product->id) }}" class="text-decoration-none text-reset">
-                                    <div class="card align-items-center h-100">
-                                        <img src="{{ Vite::asset('resources/images/GeneratedTV.jpg') }}" class="card-img-top card-img" alt="a55" style="width: 200px; height: auto;">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ $product->name }}</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <p>{{ $product->price }}$</p>
-                                            <a href="#" class="card-link"><i class="bi bi-cart-plus"></i></a>
-                                        </div>
-                                    </div>
-                                    </a>
-                                </div>
-
-                            @empty
-                                <div class="col-12">
-                                    <p>No products available.</p>
-                                </div>
-                            @endforelse
-
-
-                        </div>
+                                                <div class="card align-items-center h-100">
+{{--                                                    src="{{ asset('resources/images/' . $product->image_path) }}--}}
+                                                    <img src="{{ asset('resources/images/' . $product->image_path) }}" class="card-img-top card-img" alt="{{ $product->name }}" style="width: 200px; height: auto;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">{{ $product->name }}</h5>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <p>{{ $product->price }}$</p>
+                                                        <a href="#" class="card-link" onclick="event.stopPropagation()"><i class="bi bi-cart-plus"></i></a>
+                                                    </div>
+                                                </div>
+                                            </a>
+                            </div>
+                        @empty
+                            <div class="col-12">
+                                <p>No products available.</p>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
+            </div>
 
 
             </div>
