@@ -29,6 +29,13 @@ class LoginController extends Controller
 
         if (Auth::attempt($loginData)) {
             $request->session()->regenerate();
+
+            $user = Auth::user();
+
+            if ($user->is_admin) {
+                return redirect()->intended('/products-list');
+            }
+
             return redirect()->intended('/');
         }
 

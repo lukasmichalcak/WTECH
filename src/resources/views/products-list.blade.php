@@ -16,6 +16,9 @@
                 <div class="container border-bottom py-3">
                     <div class="row g-4 row-cols-sm-1 row-cols-md-3 row-cols-xl-6 justify-content-center">
                         <div class="col-2">
+
+
+
                             <button class="form-select rounded-pill fw-bold text-start" data-bs-toggle="modal" data-bs-target="#priceModal">
                                 Price
                             </button>
@@ -151,43 +154,56 @@
                             </form>
                         </div>
 
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="row g-0" style="padding: 0">
-                    <div class="col-12 p-3" style="background-color: white">
-                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
-
-
-                            @forelse ($products as $product)
-                                <div class="col">
-                                    <a href="{{ url('/product/' . $product->id) }}" class="text-decoration-none text-reset">
-                                    <div class="card align-items-center h-100">
-                                        <img src="{{ Vite::asset('resources/images/GeneratedTV.jpg') }}" class="card-img-top card-img" alt="a55" style="width: 200px; height: auto;">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ $product->name }}</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <p>{{ $product->price }}$</p>
-                                            <a href="#" class="card-link"><i class="bi bi-cart-plus"></i></a>
-                                        </div>
-                                    </div>
-                                    </a>
-                                </div>
-
-                            @empty
-                                <div class="col-12">
-                                    <p>No products available.</p>
-                                </div>
-                            @endforelse
-
+{{--                        @if(auth()->check() && auth()->user()->is_admin)--}}
+{{--                            <div class="container d-flex justify-content-end mt-3">--}}
+{{--                                <a href="{{ route('product-new') }}" class="btn btn-success rounded-pill fw-bold">--}}
+{{--                                    ➕--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                        @endif--}}
+                        @if(auth()->check() && auth()->user()->is_admin)
+                            <div class="container d-flex justify-content-end mt-3">
+                                <a href="{{ route('product-new') }}" class="btn btn-success rounded-pill fw-bold px-3 py-2 d-flex align-items-center">
+                                    <i class="bi bi-plus-circle me-2"></i>
+                                    Add New Product
+                                </a>
+                            </div>
+                        @endif
 
                         </div>
                     </div>
                 </div>
+
+
+            <div class="row g-0" style="padding: 0">
+                <div class="col-12 p-3" style="background-color: white">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+                        @forelse ($products as $product)
+                            <div class="col">
+
+                                <a href="{{ url(Auth::check() && Auth::user()->is_admin ? '/product-admin/' . $product->id : '/product/' . $product->id) }}" class="text-decoration-none text-reset">
+
+                                                <div class="card align-items-center h-100">
+{{--                                                    src="{{ asset('resources/images/' . $product->image_path) }}--}}
+                                                    <img src="{{ asset('resources/images/' . $product->image_path) }}" class="card-img-top card-img" alt="{{ $product->name }}" style="width: 200px; height: auto;">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">{{ $product->name }}</h5>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <p>{{ $product->price }}$</p>
+                                                        <a href="#" class="card-link" onclick="event.stopPropagation()"><i class="bi bi-cart-plus"></i></a>
+                                                    </div>
+                                                </div>
+                                            </a>
+                            </div>
+                        @empty
+                            <div class="col-12">
+                                <p>No products available.</p>
+                            </div>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
 
 
             </div>

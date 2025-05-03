@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\ProductAdminController;
+use App\Http\Controllers\ProductNewController;
 use App\Http\Controllers\ProductListController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProductController;
+//use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Header\HeaderController;
@@ -19,7 +21,18 @@ use App\Http\Controllers\ProductPageController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/product/{id}', [ProductPageController::class, 'show'])->name('product.show');
-Route::get('/products/list', [ProductListController::class, 'show'])->name('products.list');
+Route::get('/product-admin/{id}', [ProductAdminController::class, 'show'])->name('product.admin');
+Route::post('/product-admin/update/{id}', [ProductAdminController::class, 'update'])->name('product-admin.update');
+Route::delete('/product-admin/delete', [ProductAdminController::class, 'deleteImage'])->name('product.admin.delete');
+Route::delete('/product-admin/{id}', [ProductAdminController::class, 'destroy'])->name('product.admin.destroy');
+
+
+
+
+Route::get('/product-new/', [ProductNewController::class, 'show'])->name('product-new');
+Route::post('/product-new/', [ProductNewController::class, 'create'])->name('product-new.create');
+
+Route::get('/products-list', [ProductListController::class, 'show'])->name('products.list');
 
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

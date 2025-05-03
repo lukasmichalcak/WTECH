@@ -12,57 +12,24 @@ class HomeController
     public function index()
     {
 
+        // Get products with pagination
         $products = DB::table('products')->paginate(8);
 
+        // For each product, fetch its first image
+        foreach ($products as $product) {
+            // Get the first image for this product through the pivot table
+            $image = DB::table('images')
+                ->join('image_product', 'images.id', '=', 'image_product.image_id')
+                ->where('image_product.product_id', $product->id)
+                ->select('images.path')
+                ->first();
+
+            // Assign the image path to the product object
+            $product->image_path = $image ? $image->path : 'default-product.png';
+        }
+
         return view('home', compact('products'));
-//        return view('home');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
