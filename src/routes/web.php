@@ -29,8 +29,8 @@ Route::delete('/product-admin/{id}', [ProductAdminController::class, 'destroy'])
 
 
 
-Route::get('/product-new', [ProductNewController::class, 'create'])->name('product.new');
-
+Route::get('/product-new/', [ProductNewController::class, 'show'])->name('product-new');
+Route::post('/product-new/', [ProductNewController::class, 'create'])->name('product-new.create');
 
 Route::get('/products-list', [ProductListController::class, 'show'])->name('products.list');
 

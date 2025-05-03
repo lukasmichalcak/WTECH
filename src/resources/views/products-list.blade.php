@@ -16,6 +16,9 @@
                 <div class="container border-bottom py-3">
                     <div class="row g-4 row-cols-sm-1 row-cols-md-3 row-cols-xl-6 justify-content-center">
                         <div class="col-2">
+
+
+
                             <button class="form-select rounded-pill fw-bold text-start" data-bs-toggle="modal" data-bs-target="#priceModal">
                                 Price
                             </button>
@@ -150,6 +153,22 @@
 
                             </form>
                         </div>
+
+{{--                        @if(auth()->check() && auth()->user()->is_admin)--}}
+{{--                            <div class="container d-flex justify-content-end mt-3">--}}
+{{--                                <a href="{{ route('product-new') }}" class="btn btn-success rounded-pill fw-bold">--}}
+{{--                                    ➕--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                        @endif--}}
+                        @if(auth()->check() && auth()->user()->is_admin)
+                            <div class="container d-flex justify-content-end mt-3">
+                                <a href="{{ route('product-new') }}" class="btn btn-success rounded-pill fw-bold px-3 py-2 d-flex align-items-center">
+                                    <i class="bi bi-plus-circle me-2"></i>
+                                    Add New Product
+                                </a>
+                            </div>
+                        @endif
 
                         </div>
                     </div>
