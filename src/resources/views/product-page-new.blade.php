@@ -6,7 +6,7 @@
     @include('layouts.headers.header_with_search')
 
 
-    <!-- Split Content Area -->
+    <!-- Split Content Areaa -->
     <div class="container mt-3">
         <div class="row">
 
