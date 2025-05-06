@@ -9,38 +9,23 @@
         <div class="row g-0">
             <!-- Sidebar -->
             <aside class="col-12 col-md-3 col-lg-2 bg-light main-nav-bar p-3">
-
-                <a href="{{ route('products.list', ['type' => 'Smartphone']) }}" class="nav-link link-dark">
-                        Smartphones</a>
-                    <ul>
-                        <li><a class="nav-link link-dark" href="{{ route('products.list', ['brand' => 'Apple','type' => 'Smartphone']) }}">IPhones</a></li>
-                        <li><a class="nav-link link-dark" href="{{ route('products.list', ['brand' => 'Samsung','type' => 'Smartphone']) }}">Samsung</a></li>
-
-                    </ul>
-
-
-                <a href="{{ route('products.list', ['type' => 'Laptop']) }}" class="nav-link link-dark">
-                        Laptops</a>
-                    <ul>
-{{--                        <li><a href="{{ url('/products-list') }}?brand=Apple">Apple</a></li>--}}
-                        <li><a class="nav-link link-dark" href="{{ route('products.list', ['brand' => 'Apple','type' => 'Laptop']) }}">MacBook</a></li>
-                        <li><a class="nav-link link-dark" href="{{ route('products.list', ['brand' => 'Dell', 'type' => 'Laptop']) }}">Dell</a></li>
-                        <li><a class="nav-link link-dark"  href="{{ route('products.list', ['brand' => 'HP', 'type' => 'Laptop']) }}">HP</a></li>
-
-                    </ul>
-
-
-                <a href="{{ route('products.list', ['type' => 'Monitor']) }}" class="nav-link link-dark">
-                        Monitor</a>
-                    <ul>
-                        <li><a class="nav-link link-dark" href="{{ route('products.list', ['brand' => 'LG','type' => 'Monitor']) }}">LG</a></li>
-                        <li><a class="nav-link link-dark" href="{{ route('products.list', ['brand' => 'Samsung','type' => 'Monitor']) }}">Samsung</a></li>
-                    </ul>
-
-
-                <a href="{{ route('products.list', ['type' => 'Router']) }}" class="nav-link link-dark">
-                        Router</a>
-
+                @foreach ($sidebar as $type => $brands)
+                    <a href="{{ route('products.list', ['type' => $type]) }}" class="nav-link link-dark">
+                        {{ $type }}
+                    </a>
+                    @if ($brands->count())
+                        <ul>
+                            @foreach ($brands as $brand)
+                                <li>
+                                    <a class="nav-link link-dark"
+                                       href="{{ route('products.list', ['type' => $type, 'brand' => $brand]) }}">
+                                        {{ $brand }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+                @endforeach
             </aside>
 
             <!-- Main Content -->

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
+
 
 class ProductAdminController extends Controller
 {
@@ -122,9 +124,48 @@ class ProductAdminController extends Controller
         return back()->with('success', 'Image deleted.');
     }
 
+//    public function destroy($id)
+//    {
+//        // Delete variants tied to attributes (if your DB has them)
+//        $attributeIds = DB::table('attributes')
+//            ->where('product_id', $id)
+//            ->pluck('id');
+//
+//        DB::table('variants')
+//            ->whereIn('attribute_id', $attributeIds)
+//            ->delete();
+//
+//        // Delete attributes tied to this product
+//        DB::table('attributes')
+//            ->where('product_id', $id)
+//            ->delete();
+//
+//        // Get all image IDs linked to this product
+//        $imageIds = DB::table('image_product')
+//            ->where('product_id', $id)
+//            ->pluck('image_id');
+//
+//        // Delete image records
+//        DB::table('images')
+//            ->whereIn('id', $imageIds)
+//            ->delete();
+//
+//        // Delete pivot entries
+//        DB::table('image_product')
+//            ->where('product_id', $id)
+//            ->delete();
+//
+//        // Finally, delete the product
+//        DB::table('products')
+//            ->where('id', $id)
+//            ->delete();
+//
+//        return redirect()->route('home')->with('success', 'Product and all related data were deleted.');
+//    }
+
     public function destroy($id)
     {
-        // Delete variants tied to attributes (if your DB has them)
+        // Delete variants tied to attributes
         $attributeIds = DB::table('attributes')
             ->where('product_id', $id)
             ->pluck('id');
@@ -133,19 +174,41 @@ class ProductAdminController extends Controller
             ->whereIn('attribute_id', $attributeIds)
             ->delete();
 
-        // Delete attributes tied to this product
+        // Delete attributes
         DB::table('attributes')
             ->where('product_id', $id)
             ->delete();
 
-        // Get all image IDs linked to this product
-        $imageIds = DB::table('image_product')
-            ->where('product_id', $id)
-            ->pluck('image_id');
+        // Get all image IDs and paths
+        $images = DB::table('images')
+            ->join('image_product', 'images.id', '=', 'image_product.image_id')
+            ->where('image_product.product_id', $id)
+            ->select('images.id', 'images.path') // adjust 'path' to your actual column
+            ->get();
+
+        // Delete files from file system
+//        foreach ($images as $image) {
+//            if (File::exists(public_path($image->path))) {
+//                File::delete(public_path($image->path));
+//            }
+//        }
+
+
+
+        // Delete files from file system
+        foreach ($images as $image) {
+            $relativePath = 'resources/images/' . $image->path;
+            $fullPath = public_path($relativePath);
+
+            if (File::exists($fullPath)) {
+                File::delete($fullPath);
+            }
+        }
+
 
         // Delete image records
         DB::table('images')
-            ->whereIn('id', $imageIds)
+            ->whereIn('id', $images->pluck('id'))
             ->delete();
 
         // Delete pivot entries
@@ -153,14 +216,13 @@ class ProductAdminController extends Controller
             ->where('product_id', $id)
             ->delete();
 
-        // Finally, delete the product
+        // Delete product
         DB::table('products')
             ->where('id', $id)
             ->delete();
 
         return redirect()->route('home')->with('success', 'Product and all related data were deleted.');
     }
-
 
 
 }

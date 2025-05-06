@@ -4,7 +4,11 @@
             @if (request()->routeIs('home'))
                 <div class="navbar-brand">Prometex</div>
             @else
+                @if(auth()->check() && auth()->user()->is_admin)
+                <a class="navbar-brand" href="{{ route('products.list') }}">Prometex</a>
+                @else
                 <a class="navbar-brand" href="{{ route('home') }}">Prometex</a>
+                @endif
             @endif
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-supported-content" aria-controls="navbar-supported-content" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

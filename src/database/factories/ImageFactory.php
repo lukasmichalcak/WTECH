@@ -17,7 +17,7 @@ class ImageFactory extends Factory
      */
     public function definition(): array
     {
-        $images = File::files(resource_path('images'));
+        $images = File::files(public_path('resources/images'));
 
         return [
             'path' => $this->faker->randomElement(array_map(fn($file) => $file->getFilename(), $images)),
