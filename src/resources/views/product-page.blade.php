@@ -13,11 +13,7 @@
                 <div class="col-md-7 content-section">
 
                     <!-- Main Image -->
-                    @if(count($images) > 0)
                         <img id="main-image" src="{{ asset('resources/images/' . $images[0]->path) }}" class="main-img img-fluid shadow" alt="{{ $product->name }}">
-                    @else
-                        <img id="main-image" src="{{ Vite::asset('resources/images/placeholder.png') }}" class="main-img img-fluid shadow" alt="Product image not available">
-                    @endif
 
                     <!-- Thumbnail Images -->
                     <div class="container px-0">

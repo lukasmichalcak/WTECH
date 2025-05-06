@@ -81,6 +81,7 @@ class ProductListController
                 ->join('image_product', 'images.id', '=', 'image_product.image_id')
                 ->where('image_product.product_id', $product->id)
                 ->select('images.path')
+                ->whereNull('images.deleted_at')
                 ->first();
 
             // Assign the image path to the product object

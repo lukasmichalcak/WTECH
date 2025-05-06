@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Paywall;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -16,6 +17,22 @@ class CartController extends Controller
         if (auth()->check()) {
             $userId = auth()->user()->id;
             $cartItems = CartItem::with('product')->where('user_id', $userId)->get();
+            foreach ($cartItems as $item) {
+                $product = $item->product;
+                if (!$product) continue;
+
+                $image = DB::table('images')
+                    ->join('image_product', 'images.id', '=', 'image_product.image_id')
+                    ->where('image_product.product_id', $product->id)
+                    ->select('images.path')
+                    ->whereNull('images.deleted_at')
+                    ->first();
+
+                $product->image_path = $image
+                    ? asset('resources/images/' . $image->path)
+                    : asset('resources/images/default-product.png');
+            }
+
             Log::debug($cartItems);
             $total = $cartItems->sum(fn($item) => $item->amount * $item->product->price);
 
@@ -24,6 +41,21 @@ class CartController extends Controller
             $items = collect($cart)->values();
             $productIds = collect($items)->pluck('product_id')->unique();
             $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
+
+            foreach ($products as $product) {
+                $image = DB::table('images')
+                    ->join('image_product', 'images.id', '=', 'image_product.image_id')
+                    ->where('image_product.product_id', $product->id)
+                    ->select('images.path')
+                    ->whereNull('images.deleted_at')
+                    ->first();
+
+                $product->image_path = $image
+                    ? asset('resources/images/' . $image->path)
+                    : asset('resources/images/default-product.png');
+
+                Log::debug("Set image path for product {$product->id}: " . $product->image_path);
+            }
 
             $cartItems = $items->map(function ($entry) use ($products) {
                 $cartItem = new CartItem();

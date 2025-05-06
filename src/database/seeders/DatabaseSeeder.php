@@ -20,6 +20,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        User::create([
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
+            'username' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('Admin'),
+            'is_admin' => true,
+        ]);
+
         $user = User::create([
             'first_name' => 'Maroš',
             'last_name' => 'Guráň',
@@ -40,7 +49,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->count(9)->create();
 
-        $imageFiles = File::files(resource_path('images'));
+        $imageFiles = File::files(public_path('resources/images'));
 
         foreach ($imageFiles as $file) {
             $filename = $file->getFilename();
@@ -49,7 +58,7 @@ class DatabaseSeeder extends Seeder
             Image::firstOrCreate(['path' => $filename]);
         }
 
-        Product::factory()->count(1000)->create();
+        Product::factory()->count(300)->create();
 
         $products = Product::inRandomOrder()->take(5)->get();
         foreach ($products as $product) {

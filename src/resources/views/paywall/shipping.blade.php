@@ -75,7 +75,7 @@
                                 <div class="col my-card border">
                                     <div class="row row-cols-3 row-cols-xl-4 align-items-center m-2">
                                         <div class="col">
-                                            <img src="{{ Vite::asset('resources/images/A55.png') }}" class="img-thumbnail img-fluid" alt="a55" style="max-width: 100px;">
+                                            <img src="{{ $cartItem->product->image_path }}" class="img-thumbnail img-fluid" alt="{{ $cartItem->product->name }}" style="max-width: 100px;">
                                         </div>
 
                                         <div class="col">

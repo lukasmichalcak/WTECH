@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class ShippingController extends Controller
@@ -15,6 +16,21 @@ class ShippingController extends Controller
         if (auth()->check()) {
             $userId = auth()->user()->id;
             $cartItems = CartItem::with('product')->where('user_id', $userId)->get();
+            foreach ($cartItems as $item) {
+                $product = $item->product;
+                if (!$product) continue;
+
+                $image = DB::table('images')
+                    ->join('image_product', 'images.id', '=', 'image_product.image_id')
+                    ->where('image_product.product_id', $product->id)
+                    ->select('images.path')
+                    ->whereNull('images.deleted_at')
+                    ->first();
+
+                $product->image_path = $image
+                    ? asset('resources/images/' . $image->path)
+                    : asset('resources/images/default-product.png');
+            }
             Log::debug($cartItems);
             $total = $cartItems->sum(fn($item) => $item->amount * $item->product->price);
 
@@ -26,6 +42,20 @@ class ShippingController extends Controller
             })->unique()->values();
 
             $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
+            foreach ($products as $product) {
+                $image = DB::table('images')
+                    ->join('image_product', 'images.id', '=', 'image_product.image_id')
+                    ->where('image_product.product_id', $product->id)
+                    ->select('images.path')
+                    ->whereNull('images.deleted_at')
+                    ->first();
+
+                $product->image_path = $image
+                    ? asset('resources/images/' . $image->path)
+                    : asset('resources/images/default-product.png');
+
+                Log::debug("Set image path for product {$product->id}: " . $product->image_path);
+            }
 
             $cartItems = collect($cart)->map(function ($entry, $compositeKey) use ($products) {
                 [$productId, $variantHash] = explode('::', $compositeKey);
